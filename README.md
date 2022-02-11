@@ -306,3 +306,12 @@ it's now online at [https://toadstyle.org/cryptopals/].
     Since RSA encryption is such simple math, it's almost transparent
     to operations like multiplication, which lets us to stuff like recover
     unpadded messages. The code is in [`Challenge41`](src/Challenge41.md).
+
+42. **[Bleichenbacher's e=3 RSA Attack](https://cryptopals.com/sets/6/challenges/42)**:
+    Such a cool one! It's so easy to forget that the message has to
+    go at the end of the byte string, and you pay for it if you do.
+    RSA signatures (including a valid verifier) are implemented in
+    [`PublicKey.RSA`](src/PublicKey/RSA.md); they use the PKCS#1 padding scheme,
+    implemented in [`Padding.PKCS1`](src/Padding/PKCS1.md).
+    The broken validator and an attack against it are in
+    [`Challenge42`](src/Challenge42.md).

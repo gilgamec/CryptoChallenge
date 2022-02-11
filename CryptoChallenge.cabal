@@ -34,6 +34,7 @@ library
                       , vector-algorithms
                       , integer-logarithms
                       , arithmoi
+                      , attoparsec
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -50,6 +51,7 @@ library
                       , MersenneTwister
                       , Modulo
                       , Padding.Hash
+                      , Padding.PKCS1
                       , Padding.PKCS7
                       , PublicKey
                       , PublicKey.DiffieHellman
@@ -70,7 +72,7 @@ library
                       , Challenge34, Challenge35, Challenge36, Challenge37
                       , Challenge38, Challenge40
 
-                      , Challenge41
+                      , Challenge41, Challenge42
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -100,7 +102,7 @@ test-suite FastTests
                       , Test33, Test34, Test35, Test36
                       , Test37, Test38, Test39, Test40
 
-                      , Test41
+                      , Test41, Test42
 
 test-suite TimingTests
   default-language:     Haskell2010

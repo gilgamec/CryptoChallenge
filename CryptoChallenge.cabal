@@ -69,4 +69,4 @@ test-suite FastTests
                       , Test13, Test14, Test15, Test16
 
                       , Test17, Test18, Test20, Test21
-                      , Test22
+                      , Test22, Test23

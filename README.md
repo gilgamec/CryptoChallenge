@@ -188,3 +188,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
 22. **[Crack a MT19937 seed](https://cryptopals.com/sets/3/challenges/22)**:
     AKA "Why you shouldn't use the current time to seed your RNG".
     What code is needed is in [`Challenge22`](src/Challenge22.md).
+
+23. **[Clone an MT19937 RNG from its output](https://cryptopals.com/sets/3/challenges/23)**:
+    `cloneMT` added to the [`MersenneTwister`](src/MersenneTwister.md) module.
+    Most interesting to me is that you can untemper any 624 successive
+    RNG outputs, stick them into a single block, and get a new MT generator
+    that reproduces the exact output of the first, but does twisting at
+    a different time.

@@ -29,6 +29,9 @@ library
                       , url, email-validate
                       , time
                       , memory
+                      , statistics
+                      , transformers
+                      , vector-algorithms
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -54,7 +57,7 @@ library
                       , Challenge17, Challenge22, Challenge24
 
                       , Challenge25, Challenge26, Challenge27, Challenge29
-                      , Challenge30, Challenge31
+                      , Challenge30, Challenge31, Challenge32
 
 test-suite FastTests
   default-language:     Haskell2010

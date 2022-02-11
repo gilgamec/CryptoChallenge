@@ -248,3 +248,13 @@ it's now online at [https://toadstyle.org/cryptopals/].
     and two which match on the first n+1 bytes.
     The timing attack (implemented in [`Challenge31`](src/Challenge31.md))
     uses this difference to discover the valid MAC by repeated queries.
+
+32. **[Break HMAC-SHA1 with a slightly less artificial timing leak](https://cryptopals.com/sets/4/challenges/32)**:
+    The attack from Challenge 31 only works consistently with a
+    per-byte delay down to about 30ms. By using multiple queries
+    per candidate, and some simple statistics, we can get an attack
+    that finds the MAC even with a delay four orders of magnitude smaller.
+    I haven't tried running this with a delay below 5µs;
+    it *worked* with that delay, but took almost all weekend and over
+    a million queries.
+    The updated attack is implemented in [`Challenge32`](src/Challenge32.md).

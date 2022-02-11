@@ -10,6 +10,7 @@ import Timing ( TimingOracle, TimingResponse(..), getHiresTime
               , insecure_compare )
 
 import Challenge31 ( simpleTimingAttack )
+import Challenge32 ( timingAttack )
 
 import Test.Framework
 import TestFramework
@@ -116,5 +117,14 @@ main = flip defaultMainWithArgs ["--threads=1"]
     -- This works fine, but takes about 40 minutes.
     , testCase "simple timing attack works with delay of 50ms" $
         timingTest 50000 simpleTimingAttack
+    ]
+  , testGroup "Challenge 32"
+    -- With the statistical tests, we can detect a delay
+    -- three orders of magnitude smaller!
+    -- And even though we make many more queries,
+    -- since each takes much less time this test runs
+    -- (slightly) faster than the previous!
+    [ testCase "statistical timing attack works with delay of 50μs" $
+        timingTest 50 timingAttack
     ]
   ]

@@ -38,6 +38,8 @@ import qualified Test27
 import qualified Test28
 import qualified Test29
 import qualified Test30
+-- Tests 31 and 32 are not fast
+
 
 main = defaultMain $
   [ testGroup "Set 1" $ concat [ Test1.tests, Test2.tests, Test3.tests

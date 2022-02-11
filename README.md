@@ -284,3 +284,6 @@ it's now online at [https://toadstyle.org/cryptopals/].
 36. **[Implement Secure Remote Password (SRP)](https://cryptopals.com/sets/5/challenges/36)**:
     The toy client and server implementations are in
     [`Challenge36`](src/Challenge36.md).
+
+37. **[Break SRP with a zero key](https://cryptopals.com/sets/5/challenges/37)**:
+    The (hilariously simple) attacker is in [`Challenge37`](src/Challenge37.md).

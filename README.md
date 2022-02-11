@@ -269,3 +269,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     [`PublicKey.DiffieHellman`](src/PublicKey/DiffieHellman.md),
     with more general public key infrastructure defined in
     [`PublicKey`](src/PublicKey.md).
+
+34. **[Implement a MITM key-fixing attack on Diffie-Hellman with parameter injection](https://cryptopals.com/sets/5/challenges/34)**:
+    We simulate a communication protocol with threads communicating
+    via `MVar`s; this machinery is in [`CommChannel`](src/CommChannel.md).
+    The protocols for participants A and B, and the man-in-the-middle,
+    are defined in [`Challenge34`](src/Challenge34.md).

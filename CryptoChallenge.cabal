@@ -41,6 +41,7 @@ library
                       , Bytes.Hex
                       , Bytes.Base64
                       , Bytes.Integral
+                      , CommChannel
                       , Distribution
                       , Distribution.English
                       , Hash
@@ -62,6 +63,8 @@ library
 
                       , Challenge25, Challenge26, Challenge27, Challenge29
                       , Challenge30, Challenge31, Challenge32
+
+                      , Challenge34
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -88,7 +91,7 @@ test-suite FastTests
                       , Test25, Test26, Test27, Test28
                       , Test29, Test30
 
-                      , Test33
+                      , Test33, Test34
 
 test-suite TimingTests
   default-language:     Haskell2010

@@ -15,6 +15,7 @@ import Util ( cdiv )
 
 import Data.Bits ( Bits(..), FiniteBits(..) )
 import Data.List ( foldl', unfoldr )
+import Data.Word ( Word32 )
 
 import qualified Data.ByteString as B
 ```
@@ -58,6 +59,11 @@ finiteNumBytes :: (FiniteBits a, Integral a) => a -> Int
 finiteNumBytes n = finiteBitSize n `cdiv` 8
 
 instance HasBytes Int where
+  toBytes = finiteToBytes
+  fromBytes = integralFromBytes
+  numBytes = finiteNumBytes
+
+instance HasBytes Word32 where
   toBytes = finiteToBytes
   fromBytes = integralFromBytes
   numBytes = finiteNumBytes

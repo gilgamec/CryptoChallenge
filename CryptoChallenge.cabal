@@ -47,7 +47,7 @@ library
                       , Challenge11, Challenge12, Challenge13, Challenge14
                       , Challenge16
 
-                      , Challenge17, Challenge22
+                      , Challenge17, Challenge22, Challenge24
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -69,4 +69,4 @@ test-suite FastTests
                       , Test13, Test14, Test15, Test16
 
                       , Test17, Test18, Test20, Test21
-                      , Test22, Test23
+                      , Test22, Test23, Test24

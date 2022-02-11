@@ -195,3 +195,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     RNG outputs, stick them into a single block, and get a new MT generator
     that reproduces the exact output of the first, but does twisting at
     a different time.
+
+24. **[Create the MT19937 stream cipher and break it](https://cryptopals.com/sets/3/challenges/24)**:
+    For the first part of the Challenge, the keyspace is so small that
+    we can just brute-force it. Is there some cleverer way to proceed,
+    using the properties of MT specifically?
+    Code in [`Challenge24`](src/Challenge24.md).

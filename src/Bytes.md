@@ -14,6 +14,7 @@ module Bytes
     Byte, Bytes, HasBytes(..), convBytes
   , xor, xorb
   , chunksOf
+  , takeEnd, dropEnd, splitEnd
   ) where
 
 import Data.Bits ( xor )
@@ -113,4 +114,24 @@ chunksOf k = unfoldr nextBytes . toBytes
   nextBytes bs
     | B.null bs = Nothing
     | otherwise = Just $ B.splitAt k bs
+```
+
+---
+
+We use the `ByteString` equivalents of functions like
+`take` and `drop` frequently;
+however, we also often need to take a certain number of
+`Byte`s from the *end* of the sequence.
+We can do this by computing the total length and subtracting,
+but it's nice to have helper functions to handle things like this.
+
+```haskell
+takeEnd :: Int -> Bytes -> Bytes
+takeEnd n bs = B.drop (numBytes bs - n) bs
+
+dropEnd :: Int -> Bytes -> Bytes
+dropEnd n bs = B.take (numBytes bs - n) bs
+
+splitEnd :: Int -> Bytes -> (Bytes,Bytes)
+splitEnd n bs = B.splitAt (numBytes bs - n) bs
 ```

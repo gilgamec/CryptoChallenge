@@ -122,3 +122,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     [`Challenge11`](src/Challenge11.md), using new functions from
     the modules [`Random`](src/Random.md) and
     [`BlockTools`](src/BlockTools.md).
+
+12. **[Byte-at-a-time ECB decryption (Simple)](https://cryptopals.com/sets/2/challenges/12)**:
+    "Simple" in that we only have to find the unknown *suffix*
+    to our chosen plaintext.
+    [`Challenge12`](src/Challenge12.md) has the relevant code,
+    with helper functions in [`BlockTools`](src/BlockTools.md).

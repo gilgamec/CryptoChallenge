@@ -107,3 +107,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
 9. **[Implement PKCS#7 padding](https://cryptopals.com/sets/2/challenges/9)**:
    The function `padPKCS7` is defined in
    [`Padding.PKCS7`](src/Padding/PKCS7.md).
+
+10. **[Implement CBC mode](https://cryptopals.com/sets/2/challenges/10)**:
+    Encrypting is a simple left scan, while decrypting is just a zip.
+    `encryptCBC` and `decryptCBC` are defined in [`AES`](src/AES.md).

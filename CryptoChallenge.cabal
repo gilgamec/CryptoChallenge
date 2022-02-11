@@ -66,6 +66,7 @@ library
                       , PublicKey
                       , PublicKey.DiffieHellman
                       , PublicKey.ECDiffieHellman
+                      , PublicKey.ECDSA
                       , PublicKey.DSA
                       , PublicKey.RSA
                       , Random
@@ -91,6 +92,7 @@ library
                       , Challenge53, Challenge54, Challenge55, Challenge56
 
                       , Challenge57, Challenge58, Challenge59, Challenge60
+                      , Challenge61
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -127,6 +129,7 @@ test-suite FastTests
                       , Test53, Test54, Test55
 
                       , Test57, Test58, Test59, Test60
+                      , Test61
 
 test-suite SlowTests
   default-language:     Haskell2010

@@ -469,3 +469,15 @@ it's now online at [https://toadstyle.org/cryptopals/].
     is not one-to-one, so we end up having to test up to four possibilities.
     When each kangaroo chase is thirty times slower than the equivalent,
     this adds up. As a result, this Challenge finds itself in `SlowTests`.
+
+61. **[Duplicate-Signature Key Selection in ECDSA (and RSA)](https://toadstyle.org/cryptopals/61.txt)**:
+    This one's neat, and points out how the name "digital signature" is sort of
+    misleading; just because you can validate a signature doesn't mean
+    that you were the one who created it in the first place!
+    Elliptic curve DSA is implemented in
+    [`PublicKey.ECDSA`](src/PublicKey/ECDSA.md);
+    the attack on RSA uses the full Pohlig-Hellman and Pollard rho algorithms,
+    which are implemented in [`GroupOps`](src/GroupOps.md);
+    we also need to solve modular linear equations,
+    implemented in [`Math`](src/Math.md).
+    The attacks themselves are in [`Challenge61`](src/Challenge61.md).

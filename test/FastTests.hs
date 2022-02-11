@@ -70,6 +70,7 @@ import qualified Test57
 import qualified Test58
 import qualified Test59
 import qualified Test60
+import qualified Test61
 
 main = defaultMain $
   [ testGroup "Set 1" $ concat [ Test1.tests, Test2.tests, Test3.tests
@@ -92,5 +93,5 @@ main = defaultMain $
                                , Test52.tests, Test53.tests, Test54.tests
                                , Test55.tests ]
   , testGroup "Set 8" $ concat [ Test57.tests, Test58.tests, Test59.tests
-                               , Test60.testsFast ]
+                               , Test60.testsFast, Test61.tests ]
   ]

@@ -10,6 +10,7 @@ module Math
   , iroot
   , smallFactors
   , modSqrt
+  , solveLinMod
   ) where
 
 import Modulo ( mkMod, modulo, (^%) )
@@ -284,4 +285,60 @@ We can then run the loop starting with
   t0 = (mkMod n ^% q) `modulo` p
   m0 = s
   c0 = (mkMod z ^% q) `modulo` p
+```
+
+---
+
+`solveLinMod` solves linear equations in modular arithmetic,
+i.e. finds x such that ax = b + km for some k.
+The solution depends on the GCD of a and m:
+
+```haskell
+solveLinMod :: Integer -> Integer -> Integer -> [Integer]
+solveLinMod m a b = case gcd a m of
+```
+
+If a and m are relatively prime, i.e. if the GCD is 1,
+then a has a unique inverse and we have a unique root:
+
+```haskell
+  1 -> [ (mkMod b / mkMod a) `modulo` m ]
+```
+
+Otherwise, we let g = gcd a m and write a' = a / g and m' = m / g.
+Then the equation becomes
+
+    a' g x = b + k m' g     so    b = (a' x - k m') g,
+
+which obviously has no solution if g does not divide b.
+
+```haskell
+  g | b `rem` g /= 0 -> []
+```
+
+Otherwise, we can write b' = b / g and divide through by g to get
+
+    a' x = b' + k m'.
+
+```haskell
+    | otherwise ->
+        let a' = a `quot` g
+            b' = b `quot` g
+            m' = m `quot` g
+```
+
+One solution is
+
+```haskell
+            x = (mkMod b' / mkMod a') `modulo` m'
+```
+
+and we have a total of g solutions of the original equation:
+
+    x, x+m', x+2m', ... , x+(g-1)m',
+
+all of which are less than m.
+
+```haskell
+        in  [ x + k * m' | k <- [0..g-1] ]
 ```

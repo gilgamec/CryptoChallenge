@@ -23,6 +23,8 @@ import qualified Test14
 import qualified Test15
 import qualified Test16
 
+import qualified Test17
+
 main = defaultMain $
   [ testGroup "Set 1" $ concat [ Test1.tests, Test2.tests, Test3.tests
                                , Test4.tests, Test5.tests, Test6.tests
@@ -30,4 +32,5 @@ main = defaultMain $
   , testGroup "Set 2" $ concat [ Test9.tests, Test10.tests, Test11.tests
                                , Test12.tests, Test13.tests, Test14.tests
                                , Test15.tests, Test16.tests ]
+  , testGroup "Set 3" $ concat [ Test17.tests ]
   ]

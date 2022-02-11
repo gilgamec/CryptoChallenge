@@ -154,3 +154,13 @@ it's now online at [https://toadstyle.org/cryptopals/].
     equivalent XOR to the next plaintext block. We can use this to inject
     all sorts of nasty stuff into plaintext.
     The code is in [`Challenge16`](src/Challenge16.md).
+
+### Set Three: Block and Stream Crypto
+
+17. **[The CBC padding oracle](https://cryptopals.com/sets/3/challenges/17)**:
+    My favourite Challenge thus far. Because we know what bytes have to
+    appear at the end of valid PKCS#7 padding, we can use a padding oracle,
+    which only tells us whether a chosen cipher's padding is valid,
+    to completely decrypt any message.
+    The function `breakCBCPadding` is defined in module
+    [`Challenge17`](src/Challenge17.md).

@@ -208,3 +208,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
     "Because K XOR 0 == K!"
     Code for both editing and breaking the cipher in
     [`Challenge25`](src/Challenge25.md).
+
+26. **[CTR bitflipping](https://cryptopals.com/sets/4/challenges/26)**:
+    Even easier than the CBC variant.
+    Code in [`Challenge26`](src/Challenge26.md).

@@ -14,12 +14,16 @@ module GroupOps
   (
     lowOrderBase
   , pohligHellmanOracle
+  , kangarooChase
   ) where
 
 import Math ( crt, smallFactors )
 
 import Control.Monad ( forM )
+import Data.Maybe ( listToMaybe )
 import Data.Semigroup ( stimes )
+
+import Math.NumberTheory.Logarithms ( integerLog2 )
 
 import qualified Control.Monad.Random as R
 import qualified Data.Vector as V
@@ -120,4 +124,208 @@ this gives us a number congruent to x mod (product of rs).
 ```haskell
   let m = product rs
   pure (crt (zip bs rs) `rem` m, m)
+```
+
+## Pollard's kangaroo chase
+
+Another discrete logarithm solver is
+[Pollard's "kangaroo chase"](https://doi.org/10.1090/S0025-5718-1978-0491431-9).
+
+If g is a generator of our group,
+we can use it to establish a sequence of elements.
+Multiplying an element a0 by g takes us to the "next" element, a1;
+multiplying a1 by g takes us to a2, and so on.
+The idea behind the kangaroo chase is to "jump" a different distance
+at each element;
+thus, the jump at a0 might be by 20 steps (multiplying by g^20) to reach a20;
+then the jump at a20 might be by 100 steps (multiplying by g^100) to reach a120, and so on.
+(The jump sizes are determined from the element, but must be
+pseudorandomly distributed.)
+
+Notice that there is a strange effect when we do this.
+*From* any element a, there is *only one* element we jump to.
+However, there may be *more than one* element that jumps *to* an element b.
+Therefore, there must be elements that *no element* jumps to.
+In fact, there are quite a few;
+on average, about one in three elements have no predecessor,
+and this effect compounds: for about one-third of the elements
+that have a predecessor, that predecessor itself has no predecessor!
+Thus, there are a vanshingly small number of elements that have
+a path leading to them a hundred jumps deep.
+But this means that if we have taken many jumps,
+there are only a small number of places we can be;
+and if we instead take many jumps starting from another element,
+we are *almost certainly* going to eventually end up in the same place.
+(This is also the basis for a
+[neat mathematical card trick](http://faculty.uml.edu/rmontenegro/research/kruskal_count/kruskal.html).)
+
+The idea of the "kangaroo chase" is then this:
+Our unknown exponent is the "wild kangaroo";
+from the initial value we make many pseudorandom jumps.
+Then we take a "tame kangaroo" whose exponent we know and
+also make pseudorandom jumps.
+With high probability, the "wild" value will eventually coincide
+with the end point of the "tame" value;
+then, as we have recorded the total size of the jumps,
+we will be able to easily compute the exponent.
+
+For the kangaroo chase itself, we will need to be able to
+generate pseudorandom numbers from general monoidal elements;
+we thus need a *categorization function* for these elements.
+Something well-distributed and non-correlated, like a good hash function,
+is best.
+
+```haskell
+kangarooChase :: (Monoid m, Eq m)
+              => (m -> Int)
+```
+
+We have the base of the logarithm g
+and the value v = g^x whose logarithm x we want.
+
+```haskell
+              -> m -> m
+```
+
+The kangaroo chase is most effective if we have a tight
+(but still too large to brute-force) bound on the possible exponent.
+
+```haskell
+              -> (Integer,Integer)
+```
+
+Even then, we might not be able to find the logarithm.
+(If the chase fails, we might try again
+after changing the categorization function.)
+
+```haskell
+              -> Maybe Integer
+kangarooChase s g v (lo,hi) = listToMaybe matches
+ where
+```
+
+As we are jumping through the group,
+we want to keep track of not only our location, but how far we have jumped.
+Elements in the sequence will thus be pairs (k,x), where x = x_0 * g^k.
+
+To take a step from (k,x), we evaluate our pseudorandom function f at x;
+this gives us our new k_i, which we then add to k
+and take as an exponential to multiply by x.
+(The `!k` notation means that k must be strict;
+this is necessary here or we accumulate an enormous number
+of evaluations rather than just computing them as we go.)
+
+```haskell
+  kStep (!k,x) = let (ki,gki) = f x in (k + ki , x <> gki)
+```
+
+We create two sequences: the 'tame' sequence,
+starts from the end of the range at g^hi,
+while the 'wild' sequence starts from our query v.
+
+```haskell
+  tame = iterate kStep (0,hi `stimes` g)
+  wild = iterate kStep (0,v)
+```
+
+We want to find a point x where tame meets wild; at this point,
+
+    g^hi * g^kt = x = v * g^kw
+     so       v = g^(hi + kt - kw).
+
+Rather than running both in parallel,
+we just run the tame one far enough that we can be reasonably sure
+it's on the channeled path,
+and just check the running wild value against that one point.
+
+```haskell
+  (kt,xt) = tame !! n
+```
+
+We can turn our known bound on the logarithm
+into a bound on how many steps our wild sequence has to take.
+Since
+
+    v = g^d = g^(hi + kt - kw),
+
+we can see that `kw = hi + kt - d`, so d > lo means that `kw < hi - lo + kt`.
+
+```haskell
+  kwMax = hi - lo + kt
+  boundWild = takeWhile ((< kwMax) . fst) wild
+```
+
+Now we just look for a match, get the corresponding kw,
+and turn it into the logarithm.
+
+```haskell
+  matches = [ hi + kt - kw | (kw,xw) <- boundWild, xw == xt ]
+```
+
+We have not yet discussed the random-ish steps which turn our
+big cyclic group into a graph with a small limit cycle.
+After [Pollard 1978](https://doi.org/10.1090/S0025-5718-1978-0491431-9),
+we split the group into k pieces [0..k-1],
+each corresponding to a step of size 2^k.
+
+```haskell
+  fs = V.fromList [ (ki, ki `stimes` g) | i <- [0..k-1], let ki = 2^i ]
+```
+
+We simply take the categorization function `mod` k to find the step size
+for a given element.
+
+```haskell
+  f x = fs V.! (s x `mod` k)
+```
+
+The "far enough" number of steps `n` the tame kangaroo takes
+should be a constant t times the average step size;
+then the probability that we find the logarithm is about `1 - e^(-t)`.
+For t = 8, the probability of not finding the value is one third of one percent.
+Good enough for me!
+
+```haskell
+  n = fromIntegral $ 8 * (2 ^ k) `div` k
+```
+
+The only decision left is what k should be. After Pollard:
+Supposing m is the average of f(x), and recalling that n = t * m,
+we write
+
+    m = a * sqrt (hi - lo),
+    n = t * m = t * a * sqrt(hi - lo).
+
+The work done by the algorithm is proportional to the number
+of steps taken. This is n for the tame kangaroo;
+for the wild kangaroo, it's `(hi - lo)/2m` steps on average to move
+from its starting position to the top of the range,
+then another n steps to reach the tame kangaroo.
+The total number of steps is then about
+
+    steps = 2n + ((hi-lo) / 2m)
+          = 2 a t sqrt(hi-lo) + (hi-lo)/2(a sqrt(hi-lo))
+          = sqrt(hi-lo) * (2 a t + 1/2a),
+
+which has a minimum value of `2 sqrt(t*(hi-lo))` at `a = 1/(2 sqrt(t))`.
+Thus,
+
+             m = (1/2*sqrt(t)) * sqrt(hi-lo)
+         2 * m = sqrt(hi - lo) / sqrt(t).
+
+In our case, m = (2^k / k) and t = 8, so
+
+       2 * 2^k = sqrt(hi - lo) * k / sqrt(8)
+
+We take log base 2 to find
+
+           k+1 = (log (hi - lo)) / 2 + log k - (3/2)
+             k = (log (hi - lo)) / 2 + (log k - 5/2).
+
+Thus k is approximately half of log (hi - lo). A reasonable (hi - lo)
+will be somewhere between 2^20 and 2^50, i.e. k between 10 and 25,
+or log k about 4. This makes the second term about 2, so we have
+
+```haskell
+  k = (integerLog2 (hi - lo) `div` 2) + 2
 ```

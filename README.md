@@ -433,3 +433,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     [`Modulo`](src/Modulo.md) with the appropriate `Semigroup` and
     `Monoid` instances. The Challenge itself is dealt with in
     [`Challenge57`](src/Challenge57.md).
+
+58. **[Pollard's Method for Catching Kangaroos](https://toadstyle.org/cryptopals/58.txt)**:
+    The kangaroo chase (and the underlying reason it works) is one of
+    the coolest things I learned doing these Challenges. It's implemented
+    (and (hopefully) clearly explained) in [`GroupOps`](src/GroupOps.md).
+    The Challenge using it is in [`Challenge58`](src/Challenge58.md).

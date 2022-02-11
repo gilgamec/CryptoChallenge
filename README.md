@@ -53,3 +53,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
    The modules [`Bytes.Hex`](src/Bytes/Hex.md)
    and [`Bytes.Base64`](src/Bytes/Base64.md)
    contain instances for hex- and base64-encoded strings.
+
+2. **[Fixed XOR](https://cryptopals.com/sets/1/challenges/2)**:
+   Adds the `xorb` function, which performs a byte-by-byte XOR
+   of two `ByteString`s, to the [`Bytes`](src/Bytes.md) module.

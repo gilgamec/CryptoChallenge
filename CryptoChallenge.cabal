@@ -41,3 +41,4 @@ test-suite FastTests
                         -main-is FastTests
   other-modules:        TestFramework
                       , Test1
+                      , Test2

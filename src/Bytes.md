@@ -12,8 +12,10 @@ which lets us convert between different representations.
 module Bytes
   (
     Byte, Bytes, HasBytes(..), convBytes
+  , xor, xorb
   ) where
 
+import Data.Bits ( xor )
 import Data.Word ( Word8 )
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
@@ -74,4 +76,22 @@ by converting to `Bytes` and back.
 ```haskell
 convBytes :: (HasBytes a, HasBytes b) => a -> b
 convBytes = fromBytes . toBytes
+```
+
+---
+
+The most-used operation on `Bytes` is `xorb`,
+which XORs two sequences of `Byte`s byte-by-byte.
+It's meant to be used on sequences of the same length;
+if the lengths differ,
+the answer will be the same length as the shorter sequence.
+
+(The implementation may look like it's zipping into a list
+then packing back into a `ByteString`,
+but the two operations are in fact fused in
+[bytestring](https://hackage.haskell.org/package/bytestring).)
+
+```haskell
+xorb :: (HasBytes a, HasBytes b) => a -> b -> Bytes
+xorb a b = B.pack $ B.zipWith xor (toBytes a) (toBytes b)
 ```

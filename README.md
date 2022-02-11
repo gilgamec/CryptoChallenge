@@ -439,3 +439,14 @@ it's now online at [https://toadstyle.org/cryptopals/].
     the coolest things I learned doing these Challenges. It's implemented
     (and (hopefully) clearly explained) in [`GroupOps`](src/GroupOps.md).
     The Challenge using it is in [`Challenge58`](src/Challenge58.md).
+
+59. **[Elliptic Curve Diffie-Hellman and Invalid-Curve Attacks](https://toadstyle.org/cryptopals/59.txt)**:
+    On to elliptic curves! They're defined (in the Weierstrass formulation)
+    in module [`EllipticCurve`](src/EllipticCurve.md), while EC Diffie-Hellman
+    is defined in
+    [`PublicKey.ECDiffieHellman`](src/PublicKey/ECDiffieHellman.md).
+    Generating random EC points is done in [`Random`](src/Random.md),
+    using a modular square root function from [`Math`](src/Math.md).
+    Nothing needs to change in [`GroupOps`](src/GroupOps.md),
+    since those operations work on elements of any group!
+    The Challenge itself is [`Challenge59`](src/Challenge59.md).

@@ -75,3 +75,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
 4. **[Detect single-character XOR](https://cryptopals.com/sets/1/challenges/4)**:
    Just try decrypting every line of the data file.
    Only one will have a decryption to anything like English text.
+
+5. **[Implement repeating-key XOR](https://cryptopals.com/sets/1/challenges/5)**:
+   Polyalphabetic XOR is carried out by the function `polyXOR` in
+   [`XORCipher`](src/XORCipher.md).

@@ -1,12 +1,12 @@
 # Mono- and polyalphabetic XOR ciphers
 
-This module contains functions which perform and break
-monoalphabetic XOR ciphers.
+This module contains functions which perform and break XOR ciphers.
 
 ```haskell
 module XORCipher
   (
     monoXOR, breakMonoXOR
+  , polyXOR
   ) where
 
 import Bytes ( HasBytes(..), Bytes, Byte, xor )
@@ -38,4 +38,31 @@ breakMonoXOR dist text =
   let distMatch byte = logLikelihood dist $ countBytes $ monoXOR byte text
       bestByte = argmax distMatch [0..255]
   in  (monoXOR bestByte text, bestByte)
+```
+
+## Polyalphabetic XOR ciphers
+
+There are several ways to implement the polyalphabetic XOR:
+we could `xorb` the text against many repetitions of the key;
+or split the text into key-sized chunks, `xorb` each against the key,
+then concatenate them.
+Much more efficient than either is using `mapAccumL`,
+which doesn't involve allocating any temporary `ByteString`s
+and proceeds byte-by-byte along the text,
+carrying along the corresponding index into the key.
+
+```haskell
+polyXOR :: (HasBytes key, HasBytes text) => key -> text -> Bytes
+polyXOR key =
+  let key' = toBytes key
+      nextIx k = (k + 1) `mod` B.length key'
+```
+
+The accumulation function takes the current byte
+and the corresponding index into the key,
+returning the correct XOR and the next index.
+
+```haskell
+      accum k w = (nextIx k, B.index key' k `xor` w)
+  in  snd . B.mapAccumL accum 0 . toBytes
 ```

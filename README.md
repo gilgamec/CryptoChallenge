@@ -369,3 +369,8 @@ it's now online at [https://toadstyle.org/cryptopals/].
     since you can just add in a single glue block of your choice
     to paste two hashes together. Implementation and attacks are in
     [`Challenge49`](src/Challenge49.md).
+
+50. **[Hashing with CBC-MAC](https://cryptopals.com/sets/7/challenges/50)**:
+    More fun with CBC-MAC. The idea of backing up from the end of the cipher
+    to find the output hash of the block is pretty cool. Code in
+    [`Challenge50`](src/Challenge50.md).

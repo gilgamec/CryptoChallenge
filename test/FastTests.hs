@@ -64,6 +64,7 @@ import qualified Test52
 import qualified Test53
 import qualified Test54
 import qualified Test55
+-- Test 56 is not fast
 
 main = defaultMain $
   [ testGroup "Set 1" $ concat [ Test1.tests, Test2.tests, Test3.tests

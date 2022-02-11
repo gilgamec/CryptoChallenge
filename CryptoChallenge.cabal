@@ -38,6 +38,7 @@ library
                       , split
                       , zlib
                       , containers
+                      , primitive
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -83,7 +84,7 @@ library
                       , Challenge45, Challenge46, Challenge48
 
                       , Challenge49, Challenge50, Challenge51, Challenge52
-                      , Challenge53, Challenge54, Challenge55
+                      , Challenge53, Challenge54, Challenge55, Challenge56
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -118,6 +119,19 @@ test-suite FastTests
 
                       , Test49, Test50, Test51, Test52
                       , Test53, Test54, Test55
+
+test-suite SlowTests
+  default-language:     Haskell2010
+  type:                 exitcode-stdio-1.0
+  main-is:              SlowTests.hs
+  hs-source-dirs:       test
+  build-depends:        base >= 4.10 && <5
+                      , CryptoChallenge
+                      , HUnit, test-framework, test-framework-hunit
+  ghc-options:          -O2 -threaded -rtsopts -with-rtsopts=-N
+                        -main-is SlowTests
+  other-modules:        TestFramework
+                      , Test56
 
 test-suite TimingTests
   default-language:     Haskell2010

@@ -11,12 +11,18 @@ module Distribution
     Distribution
   , countBytes
   , logLikelihood
+  , chi2Test
   ) where
 
 import Bytes ( HasBytes(..) )
 
+import Data.Maybe ( fromJust )
+
 import qualified Data.ByteString as B
 import qualified Data.Vector as V
+
+import qualified Statistics.Types as S
+import qualified Statistics.Test.ChiSquared as S
 ```
 
 A distribution, in the sense of this module,
@@ -39,6 +45,8 @@ countBytes text =
       zeroDistribution = V.replicate 256 0
   in  V.accum (+) zeroDistribution bytes
 ```
+
+### Log-likelihood
 
 We want to determine, given a number of possible decryptions,
 which one best fits a given distribution.
@@ -99,4 +107,42 @@ we default the `logProb` to zero to avoid `NaN`s in the computaion.
   logProb _ 0 = 0
   logProb p o = o * log p - logFac o
   logFac k = sum $ map log [2 .. k]
+```
+
+### The chi-squared test
+
+For larger sample sizes, we can use the
+[chi-squared test](https://en.wikipedia.org/wiki/Chi-squared_test)
+instead.
+
+```haskell
+chi2Test :: Distribution-> Distribution -> Double
+chi2Test dist obs =
+```
+
+We must rescale the distribution to have the same sum as the observations:
+
+```haskell
+  let dmult = fromIntegral (sum obs) / fromIntegral (sum dist)
+      dist' = fmap ((* dmult) . fromIntegral) dist
+```
+
+We can then run the chi-squared test from the
+[statistics](https://hackage.haskell.org/package/statistics) package.
+If there is not enough data, it will return `Nothing`;
+we assume that there is enough data.
+
+(The first argument to `chi2test` is the number of extra degrees of freedom;
+since all of our observations are independent, it's zero.)
+
+```haskell
+      chi2 = fromJust $ S.chi2test 0 $ V.zip obs dist'
+```
+
+We then return the p-value of the statistic,
+which is (roughly) the likelihood the observation
+is drawn from the distribution.
+
+```haskell
+  in  S.pValue $ S.testSignificance chi2
 ```

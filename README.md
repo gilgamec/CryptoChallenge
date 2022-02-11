@@ -414,3 +414,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
 
     The final implementation is in [`Challenge55`](src/Challenge55.md);
     it's the longest source file in this repository by far.
+
+56. **[RC4 Single-Byte Biases](https://cryptopals.com/sets/7/challenges/56)**:
+    More statistics! This one's pretty slow (something like half an hour),
+    and there's more slow ones coming up, so there's a new test driver
+    [`SlowTests`](test/SlowTests.hs).
+    The implementation (and table of the observed biases of more than
+    forty billion ciphers) is in [`Challenge56`](src/Challenge56.md).

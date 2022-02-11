@@ -24,9 +24,11 @@ library
                       , base16-bytestring
                       , base64-bytestring
                       , vector
+                      , cryptonite
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
-  exposed-modules:      Bytes
+  exposed-modules:      AES
+                      , Bytes
                       , Bytes.Hex
                       , Bytes.Base64
                       , Distribution
@@ -42,6 +44,7 @@ test-suite FastTests
   build-depends:        base >= 4.10 && <5
                       , CryptoChallenge
                       , HUnit, test-framework, test-framework-hunit
+                      , bytestring
   ghc-options:          -O2 -threaded -rtsopts -with-rtsopts=-N
                         -main-is FastTests
   other-modules:        TestFramework
@@ -51,3 +54,4 @@ test-suite FastTests
                       , Test4
                       , Test5
                       , Test6
+                      , Test7

@@ -86,3 +86,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
    monoalphabetic XOR ciphers. Splitting is done by `chunksOf`, defined in
    [`Bytes`](src/Bytes.md); some new functions were also added to
    [`Util`](src/Util.md).
+
+7. **[AES in ECB mode](https://cryptopals.com/sets/1/challenges/7)**:
+   We use AES primitives from the
+   [cryptonite](https://hackage.haskell.org/package/cryptonite) package.
+   The appropriate wrapper functions are defined in the
+   [`AES`](src/AES.md) module.

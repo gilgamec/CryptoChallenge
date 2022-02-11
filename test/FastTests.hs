@@ -11,6 +11,8 @@ import qualified Test3
 import qualified Test4
 import qualified Test5
 import qualified Test6
+import qualified Test7
 
 main = defaultMain $ concat [ Test1.tests, Test2.tests, Test3.tests
-                            , Test4.tests, Test5.tests, Test6.tests ]
+                            , Test4.tests, Test5.tests, Test6.tests
+                            , Test7.tests ]

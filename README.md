@@ -201,3 +201,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     we can just brute-force it. Is there some cleverer way to proceed,
     using the properties of MT specifically?
     Code in [`Challenge24`](src/Challenge24.md).
+
+### Set Four: Stream Crypto and Randomness
+
+25. **[Break "random access read/write" AES CTR](https://cryptopals.com/sets/4/challenges/25)**:
+    "Because K XOR 0 == K!"
+    Code for both editing and breaking the cipher in
+    [`Challenge25`](src/Challenge25.md).

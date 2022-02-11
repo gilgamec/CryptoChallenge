@@ -49,6 +49,8 @@ library
 
                       , Challenge17, Challenge22, Challenge24
 
+                      , Challenge25
+
 test-suite FastTests
   default-language:     Haskell2010
   type:                 exitcode-stdio-1.0
@@ -70,3 +72,5 @@ test-suite FastTests
 
                       , Test17, Test18, Test20, Test21
                       , Test22, Test23, Test24
+
+                      , Test25

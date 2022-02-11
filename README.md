@@ -219,3 +219,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
 28. **[Implement a SHA-1 keyed MAC](https://cryptopals.com/sets/4/challenges/28)**:
     The first hash-authentication Challenge.
     SHA-1 hashes and MACs are defined in the module [`Hash`](src/Hash.md).
+
+29. **[Break a SHA-1 keyed MAC using length extension](https://cryptopals.com/sets/4/challenges/29)**:
+    This attack is so easy that it's amazing that it's
+    "very useful" in the real world.
+    The attack is in [`Challenge29`](src/Challenge29.md),
+    and it needs the definition of SHA-1 padding from
+    [`Padding.Hash`](src/Padding/Hash.md).

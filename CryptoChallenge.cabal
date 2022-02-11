@@ -41,6 +41,7 @@ library
                       , Distribution.English
                       , Hash
                       , MersenneTwister
+                      , Padding.Hash
                       , Padding.PKCS7
                       , Random
                       , Util
@@ -51,7 +52,7 @@ library
 
                       , Challenge17, Challenge22, Challenge24
 
-                      , Challenge25, Challenge26, Challenge27
+                      , Challenge25, Challenge26, Challenge27, Challenge29
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -76,3 +77,4 @@ test-suite FastTests
                       , Test22, Test23, Test24
 
                       , Test25, Test26, Test27, Test28
+                      , Test29

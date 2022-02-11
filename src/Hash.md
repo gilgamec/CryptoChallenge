@@ -9,15 +9,17 @@ module Hash
   (
     MAC(..), MACGenerator
   , secretPrefixMAC, validateMAC
+  , mkHMAC
 
   , SHA1Digest(..), sha1Hash
   , SHA1MAC, mkSHA1MAC, validateSHA1MAC
+  , mkHMACSHA1, validateHMACSHA1
 
   , MD4Digest(..), md4Hash
   , MD4MAC, mkMD4MAC, validateMD4MAC
   ) where
 
-import Bytes ( HasBytes(..), Bytes )
+import Bytes ( HasBytes(..), Bytes, xorb )
 
 import Data.Maybe ( fromJust )
 
@@ -70,6 +72,55 @@ validateMAC mkMAC key mac =
   in  macHash mac == macHash newMAC
 ```
 
+### HMAC
+
+HMAC is a generally useful MAC format which uses two layers of hashing.
+It can be used with any hash function,
+so we provide a general function for making an HMAC from a text.
+The hash function itself and its block size must be provided.
+
+```haskell
+mkHMAC :: (HasBytes digest, HasBytes key, HasBytes text)
+       => (Bytes -> digest) -> Int -> MACGenerator key text digest
+mkHMAC hash blockSize key text =
+```
+
+Our key must be made precisely `blockSize` bytes long.
+We right-pad it if too short, or hash it if too long.
+
+```haskell
+  let key' | numBytes key > blockSize = pad $ hash $ toBytes key
+           | otherwise = pad key
+      pad k = toBytes k <> B.replicate (blockSize - numBytes k) 0
+```
+
+The key is bit-flipped for use in the MAC.
+In the inner hash layer, we flip bits in the pattern 00110110 (0x36);
+in the outer layer, in the pattern 01011010 (0x5c).
+
+```haskell
+      ikey = key' `xorb` B.replicate blockSize 0x36
+      okey = key' `xorb` B.replicate blockSize 0x5c
+```
+
+The inner hash prefixes the text with `ikey`:
+
+```haskell
+      h1 = hash (ikey <> toBytes text)
+```
+
+while the outer hash prefixes `h1` with `okey`:
+
+```haskell
+      h2 = hash (okey <> toBytes h1)
+```
+
+`h2` is the hash of the entire message.
+
+```haskell
+  in  MAC{ macMessage = text, macHash = h2 }
+```
+
 ## Hash functions
 
 We use [cryptonite](https://hackage.haskell.org/package/cryptonite)'s
@@ -107,6 +158,12 @@ mkSHA1MAC = secretPrefixMAC sha1Hash
 
 validateSHA1MAC :: (HasBytes key, HasBytes text) => key -> SHA1MAC text -> Bool
 validateSHA1MAC = validateMAC mkSHA1MAC
+
+mkHMACSHA1 :: (HasBytes key, HasBytes text) => MACGenerator key text SHA1Digest
+mkHMACSHA1 = mkHMAC sha1Hash (H.hashBlockSize H.SHA1)
+
+validateHMACSHA1 :: (HasBytes key, HasBytes text) => key -> SHA1MAC text -> Bool
+validateHMACSHA1 = validateMAC mkHMACSHA1
 ```
 
 ### MD-4

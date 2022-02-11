@@ -232,3 +232,19 @@ it's now online at [https://toadstyle.org/cryptopals/].
     The attack is in [`Challenge30`](src/Challenge30.md);
     we also have to add MD4-specific stuff to
     [`Hash`](src/Hash.md) and [`Padding.Hash`](src/Padding/Hash.md).
+
+31. **[Implement and break HMAC-SHA1 with an artificial timing leak](https://cryptopals.com/sets/4/challenges/31)**:
+    This one has a lot of moving parts. Since we need to spin up a
+    webserver for testing, there's a new test driver,
+    [`TimingTests`](test/TimingTests.hs).
+    The webserver validates requests authenticated by an HMAC
+    (newly added to [`Hash`](src/Hash.md));
+    but the HMAC is compared using `insecure_compare`
+    (defined in module [`Timing`](src/Timing.md)),
+    which inserts an artificial, tunable pause between the comparison
+    of each sequential byte.
+    This means that there is a measurable difference between
+    the comparison of two strings which match on the first n bytes
+    and two which match on the first n+1 bytes.
+    The timing attack (implemented in [`Challenge31`](src/Challenge31.md))
+    uses this difference to discover the valid MAC by repeated queries.

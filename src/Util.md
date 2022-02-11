@@ -6,13 +6,14 @@ used by several of the Challenges.
 ```haskell
 module Util
   (
-    argmax, argmin
+    argmax, argmin, argmaxA
   , allPairs, seqPairs
   , countRepeats
   , cdiv
   ) where
 
 import Data.List ( tails )
+import Data.Monoid ( Ap(..) )
 import Data.Ord ( Down(..) )
 import Data.Semigroup ( Arg(..), Max(..) )
 ```
@@ -35,6 +36,18 @@ minimum function value.
 ```haskell
 argmin :: (Ord v, Foldable f) => (k -> v) -> f k -> k
 argmin f = argmax (Down . f)
+```
+
+`argmaxA` performs the argmax with a function which operates
+in an applicative context.
+
+```haskell
+argmaxA :: (Ord v, Traversable f, Applicative m) => (k -> m v) -> f k -> m k
+argmaxA f xs = getAp $ getValue <$> foldMap am xs
+ where
+  am k = Ap $ (Just . Max . (\v -> Arg v k)) <$> f k
+  getValue Nothing = error "argmaxA: empty structure"
+  getValue (Just (Max (Arg _ k))) = k
 ```
 
 ## Extracting pairs from a list

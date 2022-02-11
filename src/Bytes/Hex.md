@@ -6,12 +6,14 @@ This module describes a hex-encoded representation of a sequence of bytes.
 module Bytes.Hex
   (
     Hex, mkHex
+  , showHex
   ) where
 
-import Bytes ( HasBytes(..) )
+import Bytes ( HasBytes(..), convBytes )
 
 import Data.Char ( isHexDigit )
 import qualified Data.ByteString as B
+import qualified Data.ByteString.Char8 as BC
 import qualified Data.ByteString.Base16 as B16
 ```
 
@@ -51,4 +53,16 @@ mkHex str = case B16.decode hex of
   Left{} -> Nothing
  where
   hex = toBytes str
+```
+
+---
+
+We can use the `Hex` conversion to output
+the hexadecimal representation of any byte sequence.
+This is often more useful than showing the `Bytes` themselves
+(as characters not printable in ASCII show up as escape sequences).
+
+```haskell
+showHex :: HasBytes a => a -> String
+showHex = BC.unpack . asHex . convBytes
 ```

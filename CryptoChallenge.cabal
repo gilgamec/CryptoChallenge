@@ -57,6 +57,7 @@ library
                       , Hash.Collision
                       , Hash.MerkleDamgard
                       , Interval
+                      , LLL
                       , Math
                       , MersenneTwister
                       , Modulo
@@ -92,7 +93,7 @@ library
                       , Challenge53, Challenge54, Challenge55, Challenge56
 
                       , Challenge57, Challenge58, Challenge59, Challenge60
-                      , Challenge61
+                      , Challenge61, Challenge62
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -129,7 +130,7 @@ test-suite FastTests
                       , Test53, Test54, Test55
 
                       , Test57, Test58, Test59, Test60
-                      , Test61
+                      , Test61, Test62
 
 test-suite SlowTests
   default-language:     Haskell2010

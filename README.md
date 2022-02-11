@@ -481,3 +481,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     we also need to solve modular linear equations,
     implemented in [`Math`](src/Math.md).
     The attacks themselves are in [`Challenge61`](src/Challenge61.md).
+
+62. **[Key-Recovery Attacks on ECDSA with Biased Nonces](https://toadstyle.org/cryptopals/62.txt)**:
+    An interesting Challenge that introduced me to *lattice basis reduction*.
+    The Lenstra-Lenstra-Lovász algorithm is implemented in module
+    [`LLL`](src/LLL.md), while the attack using it is in
+    [`Challenge62`](src/Challenge62.md).

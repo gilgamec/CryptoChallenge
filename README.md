@@ -287,3 +287,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
 
 37. **[Break SRP with a zero key](https://cryptopals.com/sets/5/challenges/37)**:
     The (hilariously simple) attacker is in [`Challenge37`](src/Challenge37.md).
+
+38. **[Offline dictionary attack on simplified SRP](https://cryptopals.com/sets/5/challenges/38)**:
+    The updated, weaker SRP client and server, plus the impostor server,
+    are defined in [`Challenge38`](src/Challenge38.md).

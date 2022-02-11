@@ -361,3 +361,11 @@ it's now online at [https://toadstyle.org/cryptopals/].
     a slow convergence from gibberish to the actual message. The Challenges
     call it a "hollywood style" decryption, so the new driver is
     [`Hollywood`](test/Hollywood.hs).
+
+### Set Seven: Hashes
+
+49. **[CBC-MAC Message Forgery](https://cryptopals.com/sets/7/challenges/49)**:
+    Fairly straightforward. CBC-MAC sounds like a not-so-good idea,
+    since you can just add in a single glue block of your choice
+    to paste two hashes together. Implementation and attacks are in
+    [`Challenge49`](src/Challenge49.md).

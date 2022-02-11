@@ -450,3 +450,22 @@ it's now online at [https://toadstyle.org/cryptopals/].
     Nothing needs to change in [`GroupOps`](src/GroupOps.md),
     since those operations work on elements of any group!
     The Challenge itself is [`Challenge59`](src/Challenge59.md).
+
+60. **[Single-Coordinate Ladders and Insecure Twists](https://toadstyle.org/cryptopals/60.txt)**:
+    An alternate elliptic-curve formulation, from Montgomery;
+    the space is defined in [`EllipticCurve`](src/EllipticCurve.md),
+    the EC Diffie-Hellman variant in
+    [`PublicKey.ECDiffieHellman`](src/PublicKey/ECDiffieHellman.md).
+    The attack is in [`Challenge60`](src/Challenge60.md).
+
+    Unfortunately, here we find a problem with working with elliptic curves.
+    Combining two group elements in modular integers is just a matter of
+    a single modular multiplication. Combining two group elements in
+    elliptic curves requires a modular inversion, which needs something like
+    O(log n) divisions. This makes a lot of attacks more than an order of
+    magnitude slower in ECs than modular integers. In this Challenge,
+    the problem is magnified because we have to convert from Montgomery
+    to Weierstrass elliptic curves for the attack; but the transformation
+    is not one-to-one, so we end up having to test up to four possibilities.
+    When each kangaroo chase is thirty times slower than the equivalent,
+    this adds up. As a result, this Challenge finds itself in `SlowTests`.

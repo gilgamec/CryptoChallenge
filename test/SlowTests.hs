@@ -7,5 +7,8 @@ import Test.Framework ( defaultMain, testGroup )
 
 import qualified Test56
 
+import qualified Test60
+
 main = defaultMain $
-  [ testGroup "Set 7" $ Test56.tests ]
+  [ testGroup "Set 7" $ Test56.tests
+  , testGroup "Set 8" $ concat [ Test60.testsSlow ] ]

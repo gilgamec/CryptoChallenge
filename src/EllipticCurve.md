@@ -8,6 +8,7 @@ This module implements the mathematics of elliptic curves.
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE BangPatterns #-}
 
 module EllipticCurve
   (
@@ -17,14 +18,19 @@ module EllipticCurve
 
   , WEC(..), getWEC, mkWEC, invWEC
   , modWEC, withWEC, withWEC2
+
+  , MECParameters(..)
+  , MECPoint(..)
+  , mecLadder
   ) where
 
-import Modulo ( mkMod, getVal, modulo, withMod, (^%) )
+import Modulo ( mkMod, getVal, modulo, withMod, modulo, (^%) )
 
 import Data.List ( unfoldr )
 import Data.Reflection ( Reifies(..), reify )
 import Data.Proxy ( Proxy )
 import Data.Semigroup ( Semigroup(..), stimesMonoid )
+import Data.Tuple ( swap )
 ```
 
 ## Weierstrass formulation
@@ -224,4 +230,47 @@ For this, we'll need a group inverse function.
 ```haskell
 invWEC :: forall p. Reifies p WECParameters => WEC p -> WEC p
 invWEC w@(WEC p) = WEC $ wecInverse (reflect w) p
+```
+
+## Montgomery formulation
+
+A Montgomery elliptic curve is of the form
+
+    b*v^2 = u^3 + a*u^2 + u.
+
+```haskell
+data MECParameters = MECParameters { mecA, mecB, mecP :: Integer }
+  deriving (Eq,Ord,Show)
+```
+
+A point, however, is just the u coordinate. There are no special-case points.
+
+```haskell
+type MECPoint = Integer
+```
+
+The only operation we can really do here is the "Montgomery ladder",
+which lets us efficiently take the exponential of a point.
+It's implemented by applying certain operations
+while tracing bit-by-bit along the exponent.
+
+We are "not expected to understand" this code. (And I don't!)
+
+```haskell
+mecLadder :: MECParameters -> Integer -> MECPoint -> MECPoint
+mecLadder params k u =
+  let MECParameters { mecA = a, mecB = b, mecP = p } = params
+      nextBit 0 = Nothing
+      nextBit i = let (q,r) = i `quotRem` 2 in Just (r==1, q)
+
+      vwMult ((v2,w2),_) = (mkMod v2 * mkMod w2 ^% (p-2)) `modulo` p
+      initVW = ((1,0) , (u,1))
+
+      ladderStep b = if b then swap . ladderStep' . swap else ladderStep'
+      ladderStep' ((!v2,!w2),(!v3,!w3)) =
+        ( ( ((v2*v2 - w2*w2) ^ 2) `rem` p
+          , (4*v2*w2 * (v2*v2 + a * v2*w2 + w2*w2)) `mod` p )
+        , ( ((v2*v3 - w2*w3) ^ 2) `rem` p
+          , (u * ((v2*w3 - w2*v3) ^ 2)) `mod` p ) )
+  in  vwMult $ foldr ladderStep initVW $ unfoldr nextBit k
 ```

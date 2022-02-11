@@ -394,3 +394,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     in addition, a new function for finding collisions
     between different hash functions (or different IVs) has been added to
     [`Hash.Collision`](src/Hash/Collision.md).
+
+54. **[Kelsey and Kohno's Nostradamus Attack](https://cryptopals.com/sets/7/challenges/54)**:
+    This one's cute; we build a massive binary tree of hash collisions
+    so we can more easily collide from the hash of our faked blocks
+    into one of the leaves and down to the final hash value.
+    Implementation is in [`Challenge54`](src/Challenge54.md).

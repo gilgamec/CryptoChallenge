@@ -7,7 +7,7 @@ used by several of the Challenges.
 module Util
   (
     argmax, argmin, argmaxA
-  , allPairs, seqPairs
+  , allPairs, seqPairs, splitPairs
   , countRepeats
   , cdiv, xgcd
   ) where
@@ -68,6 +68,16 @@ allPairs as = [ (a,b) | a:bs <- tails as, b <- bs ]
 ```haskell
 seqPairs :: [a] -> [(a,a)]
 seqPairs xs = zip xs (tail xs)
+```
+
+`splitPairs` returns the list, split into disjoint pairs of adjacent elements.
+
+    splitPairs [1,2,3,4] = [(1,2),(3,4)]
+
+```haskell
+splitPairs :: [a] -> [(a,a)]
+splitPairs (a1:a2:as) = (a1,a2) : splitPairs as
+splitPairs _ = []
 ```
 
 ## Other list functions

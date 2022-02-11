@@ -294,3 +294,8 @@ it's now online at [https://toadstyle.org/cryptopals/].
 
 39. **[Implement RSA](https://cryptopals.com/sets/5/challenges/39)**:
     RSA is in [`PublicKey.RSA`](src/PublicKey/RSA.md).
+
+40. **[Implement an E=3 RSA Broadcast attack](https://cryptopals.com/sets/5/challenges/40)**:
+    The attack is in [`Challenge40`](src/Challenge40.md),
+    but it's basically just integer cube root composed with
+    the Chinese remainder theorem. Both are in the module [`Math`](src/Math.md).

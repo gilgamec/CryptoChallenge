@@ -280,3 +280,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
     More DH parameter meddling. The A and B participants are the ones from
     Challenge 34, while the new eavesdroppers are defined in
     [`Challenge35`](src/Challenge35.md).
+
+36. **[Implement Secure Remote Password (SRP)](https://cryptopals.com/sets/5/challenges/36)**:
+    The toy client and server implementations are in
+    [`Challenge36`](src/Challenge36.md).

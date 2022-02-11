@@ -17,6 +17,9 @@ module Hash
 
   , MD4Digest(..), md4Hash
   , MD4MAC, mkMD4MAC, validateMD4MAC
+
+  , SHA256Digest(..), sha256Hash
+  , SHA256MAC, mkHMACSHA256, validateHMACSHA256
   ) where
 
 import Bytes ( HasBytes(..), Bytes, xorb )
@@ -189,4 +192,31 @@ mkMD4MAC = secretPrefixMAC md4Hash
 
 validateMD4MAC :: (HasBytes key, HasBytes text) => key -> MD4MAC text -> Bool
 validateMD4MAC = validateMAC mkMD4MAC
+```
+
+### SHA-256
+
+As does the SHA-256 implementation.
+
+```haskell
+newtype SHA256Digest = SHA256Digest (H.Digest H.SHA256)
+  deriving (Eq,Ord,Show)
+
+instance HasBytes SHA256Digest where
+  toBytes (SHA256Digest ba) = A.convert ba
+  fromBytes = SHA256Digest . fromJust . H.digestFromByteString
+  numBytes _ = H.hashDigestSize H.SHA256
+
+sha256Hash :: HasBytes text => text -> SHA256Digest
+sha256Hash = SHA256Digest . H.hash . toBytes
+
+type SHA256MAC text = MAC text SHA256Digest
+
+mkHMACSHA256 :: (HasBytes key, HasBytes text)
+             => MACGenerator key text SHA256Digest
+mkHMACSHA256 = mkHMAC sha256Hash (H.hashBlockSize H.SHA256)
+
+validateHMACSHA256 :: (HasBytes key, HasBytes text)
+                   => key -> SHA256MAC text -> Bool
+validateHMACSHA256 = validateMAC mkHMACSHA256
 ```

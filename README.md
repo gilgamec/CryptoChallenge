@@ -57,3 +57,17 @@ it's now online at [https://toadstyle.org/cryptopals/].
 2. **[Fixed XOR](https://cryptopals.com/sets/1/challenges/2)**:
    Adds the `xorb` function, which performs a byte-by-byte XOR
    of two `ByteString`s, to the [`Bytes`](src/Bytes.md) module.
+
+3. **[Single-byte XOR cipher](https://cryptopals.com/sets/1/challenges/3)**:
+   We can break a monoalphabetic XOR cipher
+   by trying every possible key (there are 256 of them)
+   and comparing the decrypted result of each against the expected
+   statistical properties of the plaintext.
+   In this case, we look just at the distribution of letter frequencies.
+   [`XORCipher`](src/XORCipher.md) sets up and breaks
+   a monoalphabetic XOR cipher;
+   using the tools defined in the [`Distribution`](src/Distribution.md) module,
+   candidate plaintexts are compared against an approximate distribution
+   of English text defined in
+   [`Distribution/English`](src/Distribution/English.md).
+   The [`Util`](src/Util.md) module contains various small utility functions.

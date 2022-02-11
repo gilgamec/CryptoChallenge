@@ -23,11 +23,16 @@ library
                       , bytestring
                       , base16-bytestring
                       , base64-bytestring
+                      , vector
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      Bytes
                       , Bytes.Hex
                       , Bytes.Base64
+                      , Distribution
+                      , Distribution.English
+                      , Util
+                      , XORCipher
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -42,3 +47,4 @@ test-suite FastTests
   other-modules:        TestFramework
                       , Test1
                       , Test2
+                      , Test3

@@ -7,5 +7,6 @@ import Test.Framework ( defaultMain )
 
 import qualified Test1
 import qualified Test2
+import qualified Test3
 
-main = defaultMain $ concat [ Test1.tests, Test2.tests ]
+main = defaultMain $ concat [ Test1.tests, Test2.tests, Test3.tests ]

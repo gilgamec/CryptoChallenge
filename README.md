@@ -400,3 +400,17 @@ it's now online at [https://toadstyle.org/cryptopals/].
     so we can more easily collide from the hash of our faked blocks
     into one of the leaves and down to the final hash value.
     Implementation is in [`Challenge54`](src/Challenge54.md).
+
+55. **[MD4 Collisions](https://cryptopals.com/sets/7/challenges/55)**:
+    This one's *exhausting*. Implementing MD4 is just the start.
+    There's big table of conditions on individual bit values
+    during MD4 evaluation, and the paper is not clear on
+    where these values come from. Ensuring the first hundred or so conditions
+    isn't so bad (after you lose your eyesight debugging by squinting
+    at bit patterns), but for the last few dozen you start trampling on
+    your own work. Again, the paper's suggestion of
+    "more precise modification" is lacking in any explanation,
+    besides a single example. Have fun figuring a way around that!
+
+    The final implementation is in [`Challenge55`](src/Challenge55.md);
+    it's the longest source file in this repository by far.

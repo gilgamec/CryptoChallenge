@@ -10,10 +10,12 @@ module Random
   , randomResidue
   , randomPrimeR
   , randomWECPoint
+  , randomGF
   ) where
 
-import Bytes ( Bytes )
+import Bytes ( Bytes, convBytes )
 import EllipticCurve ( WECParameters(..), WECPoint, mkWECPoint )
+import GCM ( GF )
 import Math ( modSqrt )
 
 import qualified Data.ByteString as B
@@ -102,4 +104,14 @@ we randomly determine which and return.
     Just y  -> do
       neg <- R.getRandom
       pure $ mkWECPoint params x $ if neg then (-y) else y
+```
+
+## Random Galois field points
+
+`randomGF` creates a random element of GF(2^128);
+this is just sixteen random bytes, converted into `GF`.
+
+```haskell
+randomGF :: R.MonadRandom m => m GF
+randomGF = convBytes <$> randomBytes 16
 ```

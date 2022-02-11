@@ -40,6 +40,7 @@ library
                       , containers
                       , primitive
                       , reflection
+                      , wide-word
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -52,6 +53,7 @@ library
                       , Distribution
                       , Distribution.English
                       , EllipticCurve
+                      , GCM
                       , GroupOps
                       , Hash
                       , Hash.Collision
@@ -64,6 +66,7 @@ library
                       , Padding.Hash
                       , Padding.PKCS1
                       , Padding.PKCS7
+                      , Polynomial
                       , PublicKey
                       , PublicKey.DiffieHellman
                       , PublicKey.ECDiffieHellman
@@ -93,7 +96,7 @@ library
                       , Challenge53, Challenge54, Challenge55, Challenge56
 
                       , Challenge57, Challenge58, Challenge59, Challenge60
-                      , Challenge61, Challenge62
+                      , Challenge61, Challenge62, Challenge63
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -130,7 +133,7 @@ test-suite FastTests
                       , Test53, Test54, Test55
 
                       , Test57, Test58, Test59, Test60
-                      , Test61, Test62
+                      , Test61, Test62, Test63
 
 test-suite SlowTests
   default-language:     Haskell2010

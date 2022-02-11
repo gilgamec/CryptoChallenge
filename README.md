@@ -487,3 +487,11 @@ it's now online at [https://toadstyle.org/cryptopals/].
     The Lenstra-Lenstra-Lovász algorithm is implemented in module
     [`LLL`](src/LLL.md), while the attack using it is in
     [`Challenge62`](src/Challenge62.md).
+
+63. **[Key-Recovery Attacks on GCM with Repeated Nonces](https://toadstyle.org/cryptopals/63.txt)**:
+    Our whirlwind tour takes us on to GCM! Playing with Galois fields here
+    kind of makes me wish I'd taken advanced algebra back in school.
+    GCM and GCM-MACs are implemented in module [`GCM`](src/GCM.md).
+    The attack on repeated nonces is in [`Challenge63`](src/Challenge63.md),
+    and it uses a simple polynomial type defined in module
+    [`Polynomial`](src/Polynomial.md).

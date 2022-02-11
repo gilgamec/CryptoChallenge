@@ -381,3 +381,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     in the header, and thus the ID doesn't compress as a block;
     I'm not sure how to deal with this.
     The attack is in [`Challenge51`](src/Challenge51.md).
+
+52. **[Iterated Hash Function Multicollisions](https://cryptopals.com/sets/7/challenges/52)**:
+    Merkle-Damgard hashes are implemented in
+    [`Hash.MerkleDamgard`](src/Hash/MerkleDamgard.md), and
+    general hash collision generators are in
+    [`Hash.Collision`](src/Hash/Collision.md).
+    The Challenge is addressed in [`Challenge52`](src/Challenge52.md).

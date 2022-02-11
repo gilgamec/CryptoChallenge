@@ -144,3 +144,6 @@ it's now online at [https://toadstyle.org/cryptopals/].
     machinery to turn an infix oracle into something that our code from
     Challenge 12 can solve. The function to do that is in the module
     [`Challenge14`](src/Challenge14.md).
+
+15. **[PKCS#7 padding validation](https://cryptopals.com/sets/2/challenges/15)**:
+    We already did this to solve Challenge 13, so there's nothing new here.

@@ -338,3 +338,26 @@ it's now online at [https://toadstyle.org/cryptopals/].
 46. **[RSA parity oracle](https://cryptopals.com/sets/6/challenges/46)**:
     Really cute, but only a warmup for what's coming next.
     Code is in [`Challenge46`](src/Challenge46.md).
+
+47. **[Bleichenbacher's PKCS 1.5 Padding Oracle (Simple Case)](https://cryptopals.com/sets/6/challenges/47)** and
+48. **[Bleichenbacher's PKCS 1.5 Padding Oracle (Complete Case)](https://cryptopals.com/sets/6/challenges/48)**:
+    Probably my favourite Challenge in the entire series.
+    (Though there are a couple of really good ones coming later too.)
+    Relies on the same idea as Challenge 46 - that you can multiply
+    'through' RSA encoding - but works by finding factors we can multiply by
+    to get valid PKCS#1 padding. When we find a factor that gives us a
+    valid padding, we can limit the possible message to some finite
+    union of intervals. Challenge 47 is to implement only part of the algorithm -
+    basically everything except handling multiple intervals.
+    It's actually not much harder to go all the way to the full algorithm,
+    so only the complete attack is implemented here;
+    intervals, including intersection and union operations,
+    are implemented in module [`Interval`](src/Interval.md),
+    while the attack itself is in [`Challenge48`](src/Challenge48.md).
+
+    This is the first attack in a while that takes more than a second or so
+    to run (at least on my PCs). As such, there's a new test driver.
+    It prints out the known upper bound after each iteration, resulting in
+    a slow convergence from gibberish to the actual message. The Challenges
+    call it a "hollywood style" decryption, so the new driver is
+    [`Hollywood`](test/Hollywood.hs).

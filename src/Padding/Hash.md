@@ -6,10 +6,11 @@ This module contains functions to add padding for cryptographic hashes.
 module Padding.Hash
   (
     sha1Padding, padSHA1
+  , md4Padding, padMD4
   ) where
 
 import Bytes ( HasBytes(..), Bytes )
-import Bytes.Integral ( bigEndian )
+import Bytes.Integral ( bigEndian, littleEndian )
 
 import qualified Data.ByteString as B
 ```
@@ -54,4 +55,27 @@ padSHA1 :: HasBytes text => text -> Bytes
 padSHA1 text =
   let bs = toBytes text
   in  bs <> sha1Padding (numBytes bs)
+```
+
+---
+
+[MD4 padding](https://tools.ietf.org/html/rfc1186)
+is _almost_ the same as SHA-1.
+However, the appended size is in two 32-bit big-endian words,
+presented in little-endian order.
+("These bits are appended as two 32-bit words and appended low-order
+  word first in accordance with the previous conventions.")
+
+*The cryptonite implementation, however, seems to use pure little endian.*
+
+```haskell
+md4Padding :: Int -> Bytes
+md4Padding w = B.singleton 128 <>
+               B.replicate ((-(w + 9)) `mod` 64) 0 <>
+               littleEndian 8 (w * 8)
+
+padMD4 :: HasBytes text => text -> Bytes
+padMD4 text =
+  let bs = toBytes text
+  in  bs <> md4Padding (numBytes bs)
 ```

@@ -226,3 +226,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     The attack is in [`Challenge29`](src/Challenge29.md),
     and it needs the definition of SHA-1 padding from
     [`Padding.Hash`](src/Padding/Hash.md).
+
+30. **[Break an MD4 keyed MAC using length extension](https://cryptopals.com/sets/4/challenges/30)**:
+    The same as Challenge 29, with MD4 instead of SHA-1.
+    The attack is in [`Challenge30`](src/Challenge30.md);
+    we also have to add MD4-specific stuff to
+    [`Hash`](src/Hash.md) and [`Padding.Hash`](src/Padding/Hash.md).

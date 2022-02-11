@@ -12,6 +12,9 @@ module Hash
 
   , SHA1Digest(..), sha1Hash
   , SHA1MAC, mkSHA1MAC, validateSHA1MAC
+
+  , MD4Digest(..), md4Hash
+  , MD4MAC, mkMD4MAC, validateMD4MAC
   ) where
 
 import Bytes ( HasBytes(..), Bytes )
@@ -104,4 +107,29 @@ mkSHA1MAC = secretPrefixMAC sha1Hash
 
 validateSHA1MAC :: (HasBytes key, HasBytes text) => key -> SHA1MAC text -> Bool
 validateSHA1MAC = validateMAC mkSHA1MAC
+```
+
+### MD-4
+
+The MD-4 hash implementation works exactly the same.
+
+```haskell
+newtype MD4Digest = MD4Digest (H.Digest H.MD4)
+  deriving (Eq,Ord,Show)
+
+instance HasBytes MD4Digest where
+  toBytes (MD4Digest ba) = A.convert ba
+  fromBytes = MD4Digest . fromJust . H.digestFromByteString
+  numBytes _ = H.hashDigestSize H.MD4
+
+md4Hash :: HasBytes text => text -> MD4Digest
+md4Hash = MD4Digest . H.hash . toBytes
+
+type MD4MAC text = MAC text MD4Digest
+
+mkMD4MAC :: (HasBytes key, HasBytes text) => MACGenerator key text MD4Digest
+mkMD4MAC = secretPrefixMAC md4Hash
+
+validateMD4MAC :: (HasBytes key, HasBytes text) => key -> MD4MAC text -> Bool
+validateMD4MAC = validateMAC mkMD4MAC
 ```

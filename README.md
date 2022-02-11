@@ -374,3 +374,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     More fun with CBC-MAC. The idea of backing up from the end of the cipher
     to find the output hash of the block is pretty cool. Code in
     [`Challenge50`](src/Challenge50.md).
+
+51. **[Compression Ratio Side-Channel Attacks](https://cryptopals.com/sets/7/challenges/51)**:
+    Very occasionally the test for this will fail. I think it's because
+    the random session ID contains part of a word that appears elsewhere
+    in the header, and thus the ID doesn't compress as a block;
+    I'm not sure how to deal with this.
+    The attack is in [`Challenge51`](src/Challenge51.md).

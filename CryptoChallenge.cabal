@@ -36,6 +36,7 @@ library
                       , arithmoi
                       , attoparsec
                       , split
+                      , zlib
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -78,7 +79,7 @@ library
                       , Challenge41, Challenge42, Challenge43, Challenge44
                       , Challenge45, Challenge46, Challenge48
 
-                      , Challenge49, Challenge50
+                      , Challenge49, Challenge50, Challenge51
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -111,7 +112,7 @@ test-suite FastTests
                       , Test41, Test42, Test43, Test44
                       , Test45, Test46
 
-                      , Test49, Test50
+                      , Test49, Test50, Test51
 
 test-suite TimingTests
   default-language:     Haskell2010

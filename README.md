@@ -291,3 +291,6 @@ it's now online at [https://toadstyle.org/cryptopals/].
 38. **[Offline dictionary attack on simplified SRP](https://cryptopals.com/sets/5/challenges/38)**:
     The updated, weaker SRP client and server, plus the impostor server,
     are defined in [`Challenge38`](src/Challenge38.md).
+
+39. **[Implement RSA](https://cryptopals.com/sets/5/challenges/39)**:
+    RSA is in [`PublicKey.RSA`](src/PublicKey/RSA.md).

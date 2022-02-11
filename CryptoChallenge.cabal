@@ -33,6 +33,7 @@ library
                       , transformers
                       , vector-algorithms
                       , integer-logarithms
+                      , arithmoi
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -51,6 +52,7 @@ library
                       , Padding.PKCS7
                       , PublicKey
                       , PublicKey.DiffieHellman
+                      , PublicKey.RSA
                       , Random
                       , Timing
                       , Util
@@ -93,7 +95,7 @@ test-suite FastTests
                       , Test29, Test30
 
                       , Test33, Test34, Test35, Test36
-                      , Test37, Test38
+                      , Test37, Test38, Test39
 
 test-suite TimingTests
   default-language:     Haskell2010

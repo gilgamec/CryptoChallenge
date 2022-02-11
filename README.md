@@ -299,3 +299,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     The attack is in [`Challenge40`](src/Challenge40.md),
     but it's basically just integer cube root composed with
     the Chinese remainder theorem. Both are in the module [`Math`](src/Math.md).
+
+### Set Six: RSA and DSA
+
+41. **[Implement unpadded message recovery oracle](https://cryptopals.com/sets/6/challenges/41)**:
+    Since RSA encryption is such simple math, it's almost transparent
+    to operations like multiplication, which lets us to stuff like recover
+    unpadded messages. The code is in [`Challenge41`](src/Challenge41.md).

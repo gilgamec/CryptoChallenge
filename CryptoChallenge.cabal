@@ -70,6 +70,8 @@ library
                       , Challenge34, Challenge35, Challenge36, Challenge37
                       , Challenge38, Challenge40
 
+                      , Challenge41
+
 test-suite FastTests
   default-language:     Haskell2010
   type:                 exitcode-stdio-1.0
@@ -97,6 +99,8 @@ test-suite FastTests
 
                       , Test33, Test34, Test35, Test36
                       , Test37, Test38, Test39, Test40
+
+                      , Test41
 
 test-suite TimingTests
   default-language:     Haskell2010

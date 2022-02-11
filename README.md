@@ -509,3 +509,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     [`Challenge64`](src/Challenge64.md).
     This (and the follow-up, Challenge 65) is another slow one, so it's
     tested by the driver `SlowTests`.
+
+65. **[Truncated-MAC GCM Revisited: Improving the Key-Recovery Attack via Ciphertext Length Extension](https://toadstyle.org/cryptopals/65.txt)**:
+    The first of two bonus Challenges is also an extension of Challenge 64.
+    This time we get to mess (slightly) with the length block, which in
+    practice speeds up our first forgery by a factor of two. Since most of
+    the time taken is for that forgery, it's actually a huge improvement.
+    The Challenge is implemented in [`Challenge65`](src/Challenge65.md).

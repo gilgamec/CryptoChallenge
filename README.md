@@ -215,3 +215,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
 
 27. **[Recover the key from CBC with IV=Key](https://cryptopals.com/sets/4/challenges/27)**:
     Code in [`Challenge27`](src/Challenge27.md).
+
+28. **[Implement a SHA-1 keyed MAC](https://cryptopals.com/sets/4/challenges/28)**:
+    The first hash-authentication Challenge.
+    SHA-1 hashes and MACs are defined in the module [`Hash`](src/Hash.md).

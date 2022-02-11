@@ -28,6 +28,7 @@ library
                       , random, MonadRandom
                       , url, email-validate
                       , time
+                      , memory
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -38,6 +39,7 @@ library
                       , Bytes.Integral
                       , Distribution
                       , Distribution.English
+                      , Hash
                       , MersenneTwister
                       , Padding.PKCS7
                       , Random
@@ -73,4 +75,4 @@ test-suite FastTests
                       , Test17, Test18, Test20, Test21
                       , Test22, Test23, Test24
 
-                      , Test25, Test26, Test27
+                      , Test25, Test26, Test27, Test28

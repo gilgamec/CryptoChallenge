@@ -180,3 +180,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
 20. **[Break fixed-nonce CTR statistically](https://cryptopals.com/sets/3/challenges/20)**:
     Fixed-nonce CTR is just a repeated keystream, i.e. a polyalphabetic
     XOR cipher. We can use pretty much the same machinery to break it.
+
+21. **[Implement the MT19937 Mersenne Twister RNG](https://cryptopals.com/sets/3/challenges/21)**:
+    The Mersenne Twister implementation is in module
+    [`MersenneTwister`](src/MersenneTwister.md).

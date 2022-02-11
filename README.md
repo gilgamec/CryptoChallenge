@@ -147,3 +147,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
 
 15. **[PKCS#7 padding validation](https://cryptopals.com/sets/2/challenges/15)**:
     We already did this to solve Challenge 13, so there's nothing new here.
+
+16. **[CBC bitflipping attacks](https://cryptopals.com/sets/2/challenges/16)**:
+    Because in CBC mode we XOR each ciphertext block against the next
+    plaintext block, any change to a ciphertext block will cause the
+    equivalent XOR to the next plaintext block. We can use this to inject
+    all sorts of nasty stuff into plaintext.
+    The code is in [`Challenge16`](src/Challenge16.md).

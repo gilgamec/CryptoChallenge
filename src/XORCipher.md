@@ -7,6 +7,7 @@ module XORCipher
   (
     monoXOR, breakMonoXOR
   , polyXOR, breakPolyXOR
+  , breakMultiXOR
   , hammingDistance
   ) where
 

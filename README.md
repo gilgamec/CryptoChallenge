@@ -170,3 +170,13 @@ it's now online at [https://toadstyle.org/cryptopals/].
     to XOR against the message. Encryption and decryption functions added to
     the [`AES`](src/AES.md) module, with some utilities in
     [`Util`](src/Util.md) and [`Bytes.Integral`](src/Bytes/Integral.md).
+
+19. **[Break fixed-nonce CTR mode using substitutions](https://cryptopals.com/sets/3/challenges/19)**:
+    AKA "Try to solve this manually so you see how much easier it is
+    in Challenge 20 when we do it systematically!"
+    I fiddled with this in ghci for a while, and decrypted most of the lines;
+    but systematically is better! Thus:
+
+20. **[Break fixed-nonce CTR statistically](https://cryptopals.com/sets/3/challenges/20)**:
+    Fixed-nonce CTR is just a repeated keystream, i.e. a polyalphabetic
+    XOR cipher. We can use pretty much the same machinery to break it.

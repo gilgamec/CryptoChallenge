@@ -137,3 +137,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     supported by PKCS#7 validation in [`Padding.PKCS7`](src/Padding/PKCS7.md)
     and new functions from [`BlockTools`](src/BlockTools.md) and
     [`Util`](src/Util.md).
+
+14. **[Byte-at-a-time ECB decryption (Harder)](https://cryptopals.com/sets/2/challenges/14)**:
+    "Harder" because we now have to deal with a prefix of unknown length.
+    It's not *much* harder, though; it's pretty simple using our existing
+    machinery to turn an infix oracle into something that our code from
+    Challenge 12 can solve. The function to do that is in the module
+    [`Challenge14`](src/Challenge14.md).

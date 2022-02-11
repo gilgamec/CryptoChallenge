@@ -41,7 +41,7 @@ library
                       , Util
                       , XORCipher
 
-                      , Challenge11, Challenge12, Challenge13
+                      , Challenge11, Challenge12, Challenge13, Challenge14
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -59,4 +59,4 @@ test-suite FastTests
                       , Test5, Test6, Test7, Test8
 
                       , Test9, Test10, Test11, Test12
-                      , Test13
+                      , Test13, Test14

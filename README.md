@@ -334,3 +334,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
     specifically states that no signature is valid if r is zero.
     Setting g to p+1 works, though.
     Code is in [`Challenge45`](src/Challenge45.md).
+
+46. **[RSA parity oracle](https://cryptopals.com/sets/6/challenges/46)**:
+    Really cute, but only a warmup for what's coming next.
+    Code is in [`Challenge46`](src/Challenge46.md).

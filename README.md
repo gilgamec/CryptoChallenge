@@ -388,3 +388,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     general hash collision generators are in
     [`Hash.Collision`](src/Hash/Collision.md).
     The Challenge is addressed in [`Challenge52`](src/Challenge52.md).
+
+53. **[Kelsey and Schneier's Expandable Messages](https://cryptopals.com/sets/7/challenges/53)**:
+    Implementation in [`Challenge53`](src/Challenge53.md);
+    in addition, a new function for finding collisions
+    between different hash functions (or different IVs) has been added to
+    [`Hash.Collision`](src/Hash/Collision.md).

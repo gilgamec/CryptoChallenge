@@ -3,7 +3,7 @@
 
 module FastTests where
 
-import Test.Framework ( defaultMain )
+import Test.Framework ( defaultMain, testGroup )
 
 import qualified Test1
 import qualified Test2
@@ -14,6 +14,11 @@ import qualified Test6
 import qualified Test7
 import qualified Test8
 
-main = defaultMain $ concat [ Test1.tests, Test2.tests, Test3.tests
-                            , Test4.tests, Test5.tests, Test6.tests
-                            , Test7.tests, Test8.tests ]
+import qualified Test9
+
+main = defaultMain $
+  [ testGroup "Set 1" $ concat [ Test1.tests, Test2.tests, Test3.tests
+                               , Test4.tests, Test5.tests, Test6.tests
+                               , Test7.tests, Test8.tests ]
+  , testGroup "Set 2" $ concat [ Test9.tests ]
+  ]

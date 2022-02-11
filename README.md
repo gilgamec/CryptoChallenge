@@ -101,3 +101,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
    the Challenge is talking about.
    The function `countRepeats` in [`Util`](src/Util.md) is
    the only added code.
+
+### Set Two: Block Crypto
+
+9. **[Implement PKCS#7 padding](https://cryptopals.com/sets/2/challenges/9)**:
+   The function `padPKCS7` is defined in
+   [`Padding.PKCS7`](src/Padding/PKCS7.md).

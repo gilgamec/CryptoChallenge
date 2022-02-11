@@ -71,3 +71,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
    of English text defined in
    [`Distribution/English`](src/Distribution/English.md).
    The [`Util`](src/Util.md) module contains various small utility functions.
+
+4. **[Detect single-character XOR](https://cryptopals.com/sets/1/challenges/4)**:
+   Just try decrypting every line of the data file.
+   Only one will have a decryption to anything like English text.

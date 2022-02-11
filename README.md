@@ -315,3 +315,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
     implemented in [`Padding.PKCS1`](src/Padding/PKCS1.md).
     The broken validator and an attack against it are in
     [`Challenge42`](src/Challenge42.md).
+
+43. **[DSA key recovery from nonce](https://cryptopals.com/sets/6/challenges/43)**:
+    Calling all of these different throwaway values "nonces"
+    seems really misleading. (And we'll see more "nonces" later on!)
+    DSA is implemented in [`PublicKey.DSA`](src/PublicKey/DSA.md);
+    code to break the use of a bad "nonce" is in
+    [`Challenge43`](src/Challenge43.md).

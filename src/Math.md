@@ -8,9 +8,15 @@ module Math
   (
     crt
   , iroot
+  , smallFactors
   ) where
 
 import Util ( xgcd )
+
+import Data.Bifunctor ( first )
+import Data.Word ( Word )
+
+import Math.NumberTheory.Primes ( nextPrime, precPrime, unPrime )
 ```
 
 `crt` constructs the congruence described by the Chinese remainder theorem.
@@ -111,4 +117,69 @@ We therefore check each element against the next two elements in the list.
   findAns (x:xs@(y:z:_))
     | x == y || x == z = min y z
     | otherwise = findAns xs
+```
+
+---
+
+`smallFactors` finds small factors of an integer,
+returning the small factors and `Maybe` the unfactored remainder of the number.
+(It is a replacement for the function of the same name from the
+[arithmoi](https://hackage.haskell.org/package/arithmoi) package,
+which has been removed since my first implementation.
+It is also undoubtedly not nearly as efficient.)
+
+```haskell
+smallFactors :: Int -> Integer -> ([(Integer,Word)], Maybe Integer)
+smallFactors pmax = go smallPrimes
+ where
+```
+
+We first need a list of small primes.
+Fortunately, arithmoi can still do this.
+
+```haskell
+  primeBound = fromIntegral pmax
+  smallPrimes = map unPrime [ nextPrime 2 .. precPrime primeBound ]
+```
+
+Given a number and a prime,
+we use `divAll` to divide out all multiples of it.
+
+```haskell
+  divAll (p,k) n = case n `quotRem` p of
+    (q,0) -> divAll (p,k+1) q
+    _     -> ((p,k),n)
+```
+
+Most of the work is now done by `go`, which takes a list of small primes
+and does trial division on them in sequence.
+
+```haskell
+  go (p:ps) m
+```
+
+We know that m has no factors less than p;
+therefore, if m is less than p^2, it must be prime itself.
+It goes in the list of factors if it is small enough.
+
+```haskell
+    | m < p*p = if m <= primeBound
+                then ([(m,1)],Nothing)
+                else ([], Just m)
+```
+
+Otherwise, we check if m is divisible by p
+and divide out any factors it has, recursing.
+
+```haskell
+    | otherwise = case divAll (p,0) m of
+        ((_,0),_) -> go ps m
+        (pk,m')   -> first (pk:) $ go ps m'
+```
+
+If the list of primes is empty, then m has no factors less than `primeBound`.
+It therefore goes in the second return value.
+
+```haskell
+  go [] m = ([], Just m)
 ```

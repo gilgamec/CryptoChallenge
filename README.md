@@ -421,3 +421,15 @@ it's now online at [https://toadstyle.org/cryptopals/].
     [`SlowTests`](test/SlowTests.hs).
     The implementation (and table of the observed biases of more than
     forty billion ciphers) is in [`Challenge56`](src/Challenge56.md).
+
+### Set Eight: Abstract Algebra
+
+57. **[Diffie-Hellman Revisited: Small Subgroup Confinement](https://toadstyle.org/cryptopals/57.txt)**:
+    There's a lot going on with this Set. Many of the attacks are general;
+    they work in any group. We're only dealing with the multiplicative group
+    modulo a prime right now, but elliptic curves are coming up soon!
+    The group-agnostic attacks are located in module
+    [`GroupOps`](src/GroupOps.md); there's a special `newtype` in
+    [`Modulo`](src/Modulo.md) with the appropriate `Semigroup` and
+    `Monoid` instances. The Challenge itself is dealt with in
+    [`Challenge57`](src/Challenge57.md).

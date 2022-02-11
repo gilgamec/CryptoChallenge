@@ -12,14 +12,16 @@ are built over mathematical operations on
 module Modulo
   (
     Mod, mkMod, getVal, getModulus
-  , modulo
+  , modulo, withMod, withMod2
   , recipMod, (^%)
+  , MultMod(..), mkMultMod
   ) where
 
 import Util ( xgcd )
 
 import Control.Exception ( throw, ArithException(DivideByZero) )
 import Data.Proxy ( Proxy(..) )
+import Data.Semigroup ( Semigroup(..) )
 
 import GHC.Real ( numerator, denominator )
 import GHC.Natural ( Natural, powModNatural )
@@ -91,6 +93,28 @@ This uses `someNatVal` to create a proxy with the given value as a type.
 modulo :: (forall p. KnownNat p => Mod p) -> Integer -> Integer
 m `modulo` p = case someNatVal (fromInteger p) of
   SomeNat (_ :: Proxy p) -> getVal (m :: Mod p)
+```
+
+`modulo` is a special case of a more general function `withMod`,
+which runs a given function f with a modular argument.
+
+```haskell
+withMod :: forall h b. Integer
+        -> (forall p1. KnownNat p1 => h p1 -> b)
+        -> (forall p2. KnownNat p2 => h p2) -> b
+withMod p f mx = case someNatVal (fromInteger p) of
+  SomeNat (_ :: Proxy p) -> f (mx :: h p)
+```
+
+`withMod2` does the same, but with the phantom type parameter
+in an internal position in a higher-order type.
+
+```haskell
+withMod2 :: forall h f b. Integer
+         -> (forall p1. KnownNat p1 => f (h p1) -> b)
+         -> (forall p2. KnownNat p2 => f (h p2)) -> b
+withMod2 p f mx = case someNatVal (fromInteger p) of
+  SomeNat (_ :: Proxy p) -> f (mx :: f (h p))
 ```
 
 ## Typeclasses for Mod
@@ -213,4 +237,27 @@ We give our new operator the same fixity as the default `^`:
 
 ```haskell
 infixr 8 ^%
+```
+
+## Multiplicative group mod p
+
+The `MultMod` newtype implements `Monoid` with modular multiplication.
+
+```haskell
+newtype MultMod (p :: Nat) = MultMod { getMultMod :: Mod p }
+  deriving (Eq,Ord,Show)
+
+instance KnownNat p => Semigroup (MultMod p) where
+  (MultMod a) <> (MultMod b) = MultMod (a * b)
+  stimes k (MultMod a) = MultMod (a ^% k)
+
+instance KnownNat p => Monoid (MultMod p) where
+  mempty = MultMod 1
+```
+
+We add a function `mkMultMod` to more easily inject an integer:
+
+```haskell
+mkMultMod :: (KnownNat p, Integral a) => a -> MultMod p
+mkMultMod = MultMod . mkMod
 ```

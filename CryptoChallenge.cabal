@@ -50,6 +50,7 @@ library
                       , CommChannel
                       , Distribution
                       , Distribution.English
+                      , GroupOps
                       , Hash
                       , Hash.Collision
                       , Hash.MerkleDamgard
@@ -86,6 +87,8 @@ library
                       , Challenge49, Challenge50, Challenge51, Challenge52
                       , Challenge53, Challenge54, Challenge55, Challenge56
 
+                      , Challenge57
+
 test-suite FastTests
   default-language:     Haskell2010
   type:                 exitcode-stdio-1.0
@@ -119,6 +122,8 @@ test-suite FastTests
 
                       , Test49, Test50, Test51, Test52
                       , Test53, Test54, Test55
+
+                      , Test57
 
 test-suite SlowTests
   default-language:     Haskell2010

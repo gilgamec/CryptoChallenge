@@ -43,3 +43,13 @@ the first seven sets were available online at [https://cryptopals.com].
 Set 8 was not available until it was re-released in 2018,
 with two bonus challenges, as part of a political fundraiser;
 it's now online at [https://toadstyle.org/cryptopals/].
+
+### Set One: Basics
+
+1. **[Convert hex to base64](https://cryptopals.com/sets/1/challenges/1)**:
+   The [`Bytes`](src/Bytes.md) module introduces the `HasBytes` class,
+   which describes anything that can be converted back and forth
+   from a `ByteString`.
+   The modules [`Bytes.Hex`](src/Bytes/Hex.md)
+   and [`Bytes.Base64`](src/Bytes/Base64.md)
+   contain instances for hex- and base64-encoded strings.

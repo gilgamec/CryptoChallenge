@@ -5,4 +5,6 @@ module FastTests where
 
 import Test.Framework ( defaultMain )
 
-main = defaultMain []
+import qualified Test1
+
+main = defaultMain $ concat [ Test1.tests ]

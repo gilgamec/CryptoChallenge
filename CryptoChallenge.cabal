@@ -25,17 +25,22 @@ library
                       , base64-bytestring
                       , vector
                       , cryptonite
+                      , random, MonadRandom
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
+                      , BlockTools
                       , Bytes
                       , Bytes.Hex
                       , Bytes.Base64
                       , Distribution
                       , Distribution.English
                       , Padding.PKCS7
+                      , Random
                       , Util
                       , XORCipher
+
+                      , Challenge11
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -52,4 +57,4 @@ test-suite FastTests
                       , Test1, Test2, Test3, Test4
                       , Test5, Test6, Test7, Test8
 
-                      , Test9, Test10
+                      , Test9, Test10, Test11

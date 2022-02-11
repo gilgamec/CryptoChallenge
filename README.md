@@ -111,3 +111,14 @@ it's now online at [https://toadstyle.org/cryptopals/].
 10. **[Implement CBC mode](https://cryptopals.com/sets/2/challenges/10)**:
     Encrypting is a simple left scan, while decrypting is just a zip.
     `encryptCBC` and `decryptCBC` are defined in [`AES`](src/AES.md).
+
+11. **[An ECB/CBC detection oracle](https://cryptopals.com/sets/2/challenges/11)**:
+    Our first chosen-plaintext attack.
+    We can tell if an encryption system is using ECB or CBC
+    by encrypting a plaintext with many repeated blocks;
+    an ECB-encrypted text will then have many repeated
+    ciphertext blocks, while the text encrypted with CBC will not.
+    This test is carried out by module
+    [`Challenge11`](src/Challenge11.md), using new functions from
+    the modules [`Random`](src/Random.md) and
+    [`BlockTools`](src/BlockTools.md).

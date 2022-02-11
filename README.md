@@ -212,3 +212,6 @@ it's now online at [https://toadstyle.org/cryptopals/].
 26. **[CTR bitflipping](https://cryptopals.com/sets/4/challenges/26)**:
     Even easier than the CBC variant.
     Code in [`Challenge26`](src/Challenge26.md).
+
+27. **[Recover the key from CBC with IV=Key](https://cryptopals.com/sets/4/challenges/27)**:
+    Code in [`Challenge27`](src/Challenge27.md).

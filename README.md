@@ -516,3 +516,8 @@ it's now online at [https://toadstyle.org/cryptopals/].
     practice speeds up our first forgery by a factor of two. Since most of
     the time taken is for that forgery, it's actually a huge improvement.
     The Challenge is implemented in [`Challenge65`](src/Challenge65.md).
+
+66. **[Exploiting Implementation Errors in Diffie-Hellman](https://toadstyle.org/cryptopals/66.txt)**:
+    The second bonus Challenge, and the last in the series (so far!).
+    The implementation is in [`Challenge66`](src/Challenge66.md).
+    It's a slow one again, tested by `SlowTests`.

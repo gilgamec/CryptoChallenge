@@ -275,3 +275,8 @@ it's now online at [https://toadstyle.org/cryptopals/].
     via `MVar`s; this machinery is in [`CommChannel`](src/CommChannel.md).
     The protocols for participants A and B, and the man-in-the-middle,
     are defined in [`Challenge34`](src/Challenge34.md).
+
+35. **[Implement DH with negotiated groups, and break with malicious "g" parameters](https://cryptopals.com/sets/5/challenges/35)**:
+    More DH parameter meddling. The A and B participants are the ones from
+    Challenge 34, while the new eavesdroppers are defined in
+    [`Challenge35`](src/Challenge35.md).

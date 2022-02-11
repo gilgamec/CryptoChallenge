@@ -73,7 +73,7 @@ library
                       , Challenge34, Challenge35, Challenge36, Challenge37
                       , Challenge38, Challenge40
 
-                      , Challenge41, Challenge42, Challenge43
+                      , Challenge41, Challenge42, Challenge43, Challenge44
 
 test-suite FastTests
   default-language:     Haskell2010
@@ -103,7 +103,7 @@ test-suite FastTests
                       , Test33, Test34, Test35, Test36
                       , Test37, Test38, Test39, Test40
 
-                      , Test41, Test42, Test43
+                      , Test41, Test42, Test43, Test44
 
 test-suite TimingTests
   default-language:     Haskell2010

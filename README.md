@@ -317,8 +317,12 @@ it's now online at [https://toadstyle.org/cryptopals/].
     [`Challenge42`](src/Challenge42.md).
 
 43. **[DSA key recovery from nonce](https://cryptopals.com/sets/6/challenges/43)**:
-    Calling all of these different throwaway values "nonces"
+    Calling all of these different non-repeated throwaway values "nonces"
     seems really misleading. (And we'll see more "nonces" later on!)
     DSA is implemented in [`PublicKey.DSA`](src/PublicKey/DSA.md);
     code to break the use of a bad "nonce" is in
     [`Challenge43`](src/Challenge43.md).
+
+44. **[DSA nonce recovery from repeated nonce](https://cryptopals.com/sets/6/challenges/44)**:
+    Once again, repeat the nonce, give up the game.
+    Code is in [`Challenge44`](src/Challenge44.md).

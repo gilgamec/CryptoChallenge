@@ -184,3 +184,7 @@ it's now online at [https://toadstyle.org/cryptopals/].
 21. **[Implement the MT19937 Mersenne Twister RNG](https://cryptopals.com/sets/3/challenges/21)**:
     The Mersenne Twister implementation is in module
     [`MersenneTwister`](src/MersenneTwister.md).
+
+22. **[Crack a MT19937 seed](https://cryptopals.com/sets/3/challenges/22)**:
+    AKA "Why you shouldn't use the current time to seed your RNG".
+    What code is needed is in [`Challenge22`](src/Challenge22.md).

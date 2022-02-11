@@ -495,3 +495,17 @@ it's now online at [https://toadstyle.org/cryptopals/].
     The attack on repeated nonces is in [`Challenge63`](src/Challenge63.md),
     and it uses a simple polynomial type defined in module
     [`Polynomial`](src/Polynomial.md).
+
+64. **[Key-Recovery Attacks on GCM with a Truncated MAC](https://toadstyle.org/cryptopals/64.txt)**:
+    This is a completely different kind of attack, relying on the fact that
+    some blocks in the GCM polynomial are squared, taken to the fourth power,
+    and so on; since these are linear operations in GF(2^128), we can
+    reduce changing these blocks to a problem in linear algebra!
+    This is probably the most complex attack in the series;
+    I had to go over it several times piece by piece before I really
+    understood what it was doing and how it worked.
+    Linear algebra on bit matrices is implemented in module
+    [`BitMatrix`](src/BitMatrix.md); the attack itself is in
+    [`Challenge64`](src/Challenge64.md).
+    This (and the follow-up, Challenge 65) is another slow one, so it's
+    tested by the driver `SlowTests`.

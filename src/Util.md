@@ -8,7 +8,7 @@ module Util
   (
     argmax, argmin, argmaxA
   , allPairs, seqPairs, splitPairs
-  , countRepeats
+  , countRepeats, interleave
   , cdiv, xgcd
   ) where
 
@@ -93,6 +93,14 @@ countRepeats xs = go xs []
   go (y:ys) xs
     | y `elem` xs = 1 + go ys xs
     | otherwise   = go ys (y:xs)
+```
+
+`interleave` alternates between two lists to create a single list.
+
+```haskell
+interleave :: [a] -> [a] -> [a]
+interleave (x:xs) (y:ys) = x : y : interleave xs ys
+interleave xs ys = xs ++ ys
 ```
 
 ## Mathematical functions

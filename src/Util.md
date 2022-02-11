@@ -7,7 +7,7 @@ used by several of the Challenges.
 module Util
   (
     argmax, argmin
-  , allPairs
+  , allPairs, seqPairs
   , countRepeats
   ) where
 
@@ -45,6 +45,15 @@ argmin f = argmax (Down . f)
 ```haskell
 allPairs :: [a] -> [(a,a)]
 allPairs as = [ (a,b) | a:bs <- tails as, b <- bs ]
+```
+
+`seqPairs` returns all pairs of sequential values from the list.
+
+    seqPairs [1,2,3,4] = [(1,2),(2,3),(3,4)]
+
+```haskell
+seqPairs :: [a] -> [(a,a)]
+seqPairs xs = zip xs (tail xs)
 ```
 
 ## Other list functions

@@ -7,9 +7,10 @@ This module contains functions to add and validate
 module Padding.PKCS7
   (
     padPKCS7
+  , validatePKCS7
   ) where
 
-import Bytes ( HasBytes(..), Bytes )
+import Bytes ( HasBytes(..), Bytes, splitEnd )
 
 import qualified Data.ByteString as B
 ```
@@ -29,4 +30,38 @@ padPKCS7 blockSize text =
       paddingLength = blockSize - (B.length bytes `rem` blockSize)
       padding = B.replicate paddingLength (toEnum paddingLength)
   in  bytes <> padding
+```
+
+We can validate PKCS#7 by checking that the last `n` characters are just `n`.
+
+```haskell
+validatePKCS7 :: Bytes -> Maybe Bytes
+validatePKCS7 bs
+```
+
+No valid padding ends in a zero byte.
+
+```haskell
+  | lastVal == 0 = Nothing
+```
+
+The entire message must be at least as long as the final byte.
+
+```haskell
+  | numBytes bs < fromIntegral lastVal = Nothing
+```
+
+The last `lastVal` bytes must be equal to `lastVal`.
+
+```haskell
+  | B.any (/= lastVal) lastBunch = Nothing
+```
+
+Otherwise, we can just return the message stripped of the final `lastVal` bytes.
+
+```haskell
+  | otherwise = Just message
+ where
+  lastVal = B.last bs
+  (message,lastBunch) = splitEnd (fromIntegral lastVal) bs
 ```

@@ -128,3 +128,12 @@ it's now online at [https://toadstyle.org/cryptopals/].
     to our chosen plaintext.
     [`Challenge12`](src/Challenge12.md) has the relevant code,
     with helper functions in [`BlockTools`](src/BlockTools.md).
+
+13. **[ECB cut-and-paste](https://cryptopals.com/sets/2/challenges/13)**:
+    Break an encrypted user profile to gain admin privileges.
+    This involves writing a profile creator, sanitizer, and validator,
+    then a function which breaks it.
+    Both are in [`Challenge13`](src/Challenge13.md),
+    supported by PKCS#7 validation in [`Padding.PKCS7`](src/Padding/PKCS7.md)
+    and new functions from [`BlockTools`](src/BlockTools.md) and
+    [`Util`](src/Util.md).

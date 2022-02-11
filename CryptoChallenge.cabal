@@ -1,0 +1,36 @@
+cabal-version:          2.2
+name:                   CryptoChallenge
+version:                1.0.0.0
+synopsis:               Solutions to the Cryptopals Crypto Challenges
+homepage:               https://github.com/gilgamec/CryptoChallenge#readme
+author:                 Brendan Lane
+maintainer:             gilgamec@gmail.com
+copyright:              2022 Brendan Lane
+license:                BSD-3-Clause
+license-file:           LICENSE
+build-type:             Simple
+
+extra-source-files:     README.md
+
+source-repository head
+  type:                 git
+  location:             https://github.com/gilgamec/CryptoChallenge
+
+library
+  default-language:     Haskell2010
+  hs-source-dirs:       src
+  build-depends:        base >= 4.10 && < 5
+  build-tool-depends:   markdown-unlit:markdown-unlit
+  ghc-options:          -O2 -pgmL markdown-unlit
+
+test-suite FastTests
+  default-language:     Haskell2010
+  type:                 exitcode-stdio-1.0
+  main-is:              FastTests.hs
+  hs-source-dirs:       test
+  build-depends:        base >= 4.10 && <5
+                      , CryptoChallenge
+                      , HUnit, test-framework, test-framework-hunit
+  ghc-options:          -O2 -threaded -rtsopts -with-rtsopts=-N
+                        -main-is FastTests
+  other-modules:        TestFramework

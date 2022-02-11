@@ -326,3 +326,11 @@ it's now online at [https://toadstyle.org/cryptopals/].
 44. **[DSA nonce recovery from repeated nonce](https://cryptopals.com/sets/6/challenges/44)**:
     Once again, repeat the nonce, give up the game.
     Code is in [`Challenge44`](src/Challenge44.md).
+
+45. **[DSA parameter tampering](https://cryptopals.com/sets/6/challenges/45)**:
+    More fun with invalid parameters. Unfortunately for us, setting g to zero
+    won't work; if g is zero, then any signature with r = 0 is valid, but the
+    [DSA specification](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf)
+    specifically states that no signature is valid if r is zero.
+    Setting g to p+1 works, though.
+    Code is in [`Challenge45`](src/Challenge45.md).

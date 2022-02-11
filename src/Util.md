@@ -8,6 +8,7 @@ module Util
   (
     argmax, argmin
   , allPairs
+  , countRepeats
   ) where
 
 import Data.List ( tails )
@@ -44,4 +45,19 @@ argmin f = argmax (Down . f)
 ```haskell
 allPairs :: [a] -> [(a,a)]
 allPairs as = [ (a,b) | a:bs <- tails as, b <- bs ]
+```
+
+## Other list functions
+
+`countRepeats` counts how many elements in the list are repeats
+of other elements.
+
+```haskell
+countRepeats :: Eq a => [a] -> Int
+countRepeats xs = go xs []
+ where
+  go [] _ = 0
+  go (y:ys) xs
+    | y `elem` xs = 1 + go ys xs
+    | otherwise   = go ys (y:xs)
 ```

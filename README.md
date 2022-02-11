@@ -92,3 +92,12 @@ it's now online at [https://toadstyle.org/cryptopals/].
    [cryptonite](https://hackage.haskell.org/package/cryptonite) package.
    The appropriate wrapper functions are defined in the
    [`AES`](src/AES.md) module.
+
+8. **[Detect AES in ECB mode](https://cryptopals.com/sets/1/challenges/8)**:
+   I don't see how this could be done in general;
+   I don't think any "normal" text will have lots of repeated 16-byte blocks.
+   But one of the texts in the input file does,
+   so (since ECB is a permutation on 16-byte blocks) it must be the text
+   the Challenge is talking about.
+   The function `countRepeats` in [`Util`](src/Util.md) is
+   the only added code.

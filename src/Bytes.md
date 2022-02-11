@@ -13,9 +13,11 @@ module Bytes
   (
     Byte, Bytes, HasBytes(..), convBytes
   , xor, xorb
+  , chunksOf
   ) where
 
 import Data.Bits ( xor )
+import Data.List ( unfoldr )
 import Data.Word ( Word8 )
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
@@ -94,4 +96,21 @@ but the two operations are in fact fused in
 ```haskell
 xorb :: (HasBytes a, HasBytes b) => a -> b -> Bytes
 xorb a b = B.pack $ B.zipWith xor (toBytes a) (toBytes b)
+```
+
+---
+
+`chunksOf` splits a byte sequence into blocks of the given size
+(though the final block might be smaller if the total length is not a
+multiple of the block size).
+Since many encryption schemes are block-based,
+this will see frequent use.
+
+```haskell
+chunksOf :: HasBytes a => Int -> a -> [Bytes]
+chunksOf k = unfoldr nextBytes . toBytes
+ where
+  nextBytes bs
+    | B.null bs = Nothing
+    | otherwise = Just $ B.splitAt k bs
 ```

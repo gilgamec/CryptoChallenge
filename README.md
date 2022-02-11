@@ -79,3 +79,10 @@ it's now online at [https://toadstyle.org/cryptopals/].
 5. **[Implement repeating-key XOR](https://cryptopals.com/sets/1/challenges/5)**:
    Polyalphabetic XOR is carried out by the function `polyXOR` in
    [`XORCipher`](src/XORCipher.md).
+
+6. **[Break repeating-key XOR](https://cryptopals.com/sets/1/challenges/6)**:
+   The function `breakPolyXOR` in [`XORCipher`](src/XORCipher.md)
+   decrypts a polyalphabetic XOR cipher by splitting it into multiple
+   monoalphabetic XOR ciphers. Splitting is done by `chunksOf`, defined in
+   [`Bytes`](src/Bytes.md); some new functions were also added to
+   [`Util`](src/Util.md).

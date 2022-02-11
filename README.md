@@ -258,3 +258,14 @@ it's now online at [https://toadstyle.org/cryptopals/].
     it *worked* with that delay, but took almost all weekend and over
     a million queries.
     The updated attack is implemented in [`Challenge32`](src/Challenge32.md).
+
+### Set Five: Diffie-Hellman and Friends
+
+33. **[Implement Diffie-Hellman](https://cryptopals.com/sets/5/challenges/33)**:
+    Halfway through the Challenges, we come to number-theoretic cryptography.
+    One of the most-used modules from now on will be
+    [`Modulo`](src/Modulo.md), which implements arithmetic on numbers
+    modulo a large integer. Diffie-Hellman itself is described in the module
+    [`PublicKey.DiffieHellman`](src/PublicKey/DiffieHellman.md),
+    with more general public key infrastructure defined in
+    [`PublicKey`](src/PublicKey.md).

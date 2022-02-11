@@ -17,6 +17,8 @@ import Data.Bits ( Bits(..), FiniteBits(..) )
 import Data.List ( foldl', unfoldr )
 import Data.Word ( Word32 )
 
+import Math.NumberTheory.Logarithms ( integerLog2 )
+
 import qualified Data.ByteString as B
 ```
 
@@ -67,6 +69,33 @@ instance HasBytes Word32 where
   toBytes = finiteToBytes
   fromBytes = integralFromBytes
   numBytes = finiteNumBytes
+```
+
+For `Integer`, we say arbitrarily that
+we can only convert positive values.
+(Everything we have to convert for these Challenges is positive.)
+These conversions use only as many bytes as necessary
+to represent the number.
+
+```haskell
+instance HasBytes Integer where
+  toBytes n = case compare n 0 of
+    LT -> error "Cannot convert negative Integer to Bytes"
+    EQ -> B.singleton 0
+    GT -> B.reverse (B.unfoldr nextIntToByte n)
+  fromBytes = integralFromBytes
+```
+
+To compute the number of bytes taken up by an `Integer`,
+we use its logarithm base 2, computed by the
+[integer-logarithms](https://hackage.haskell.org/package/integer-logarithms)
+package.
+
+```haskell
+  numBytes n = case compare n 0 of
+    LT -> error "Cannot convert negative Integer to Bytes"
+    EQ -> 1
+    GT -> (integerLog2 n + 1) `cdiv` 8
 ```
 
 ---

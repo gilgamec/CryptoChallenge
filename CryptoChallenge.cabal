@@ -32,6 +32,7 @@ library
                       , statistics
                       , transformers
                       , vector-algorithms
+                      , integer-logarithms
   build-tool-depends:   markdown-unlit:markdown-unlit
   ghc-options:          -O2 -pgmL markdown-unlit
   exposed-modules:      AES
@@ -44,8 +45,11 @@ library
                       , Distribution.English
                       , Hash
                       , MersenneTwister
+                      , Modulo
                       , Padding.Hash
                       , Padding.PKCS7
+                      , PublicKey
+                      , PublicKey.DiffieHellman
                       , Random
                       , Timing
                       , Util
@@ -83,6 +87,8 @@ test-suite FastTests
 
                       , Test25, Test26, Test27, Test28
                       , Test29, Test30
+
+                      , Test33
 
 test-suite TimingTests
   default-language:     Haskell2010

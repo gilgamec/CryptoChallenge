@@ -9,7 +9,7 @@ module Util
     argmax, argmin, argmaxA
   , allPairs, seqPairs
   , countRepeats
-  , cdiv
+  , cdiv, xgcd
   ) where
 
 import Data.List ( tails )
@@ -96,4 +96,19 @@ cdiv :: Integral a => a -> a -> a
 n `cdiv` d =
   let (q,r) = n `quotRem` d
   in  q + signum r
+```
+
+`xgcd` finds the *extended GCD* of two numbers;
+that is, if `g` is the greatest common divisor of `a` and `b`,
+then `xgcd` finds `g` as well as two numbers `p` and `q`
+such that `pa + qb = g`.
+
+```haskell
+xgcd :: Integral a => a -> a -> (a,(a,a))
+xgcd a b = go (a,(1,0)) (b,(0,1))
+ where
+  go rst (0,_) = rst
+  go (r1,(s1,t1)) (r2,(s2,t2)) =
+    let q = r1 `div` r2
+    in  go (r2,(s2,t2)) (r1 - q*r2, (s1 - q*s2, t1 - q*t2))
 ```

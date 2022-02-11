@@ -40,6 +40,7 @@ import qualified Test29
 import qualified Test30
 -- Tests 31 and 32 are not fast
 
+import qualified Test33
 
 main = defaultMain $
   [ testGroup "Set 1" $ concat [ Test1.tests, Test2.tests, Test3.tests
@@ -53,4 +54,5 @@ main = defaultMain $
                                , Test24.tests ]
   , testGroup "Set 4" $ concat [ Test25.tests, Test26.tests, Test27.tests
                                , Test28.tests, Test29.tests, Test30.tests ]
+  , testGroup "Set 5" $ concat [ Test33.tests ]
   ]

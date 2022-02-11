@@ -164,3 +164,9 @@ it's now online at [https://toadstyle.org/cryptopals/].
     to completely decrypt any message.
     The function `breakCBCPadding` is defined in module
     [`Challenge17`](src/Challenge17.md).
+
+18. **[Implement CTR, the stream cipher mode](https://cryptopals.com/sets/3/challenges/18)**:
+    Encrypt the numbers 0, 1, 2... and use the resulting blocks as a keystream
+    to XOR against the message. Encryption and decryption functions added to
+    the [`AES`](src/AES.md) module, with some utilities in
+    [`Util`](src/Util.md) and [`Bytes.Integral`](src/Bytes/Integral.md).

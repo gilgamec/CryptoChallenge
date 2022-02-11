@@ -9,6 +9,7 @@ module Util
     argmax, argmin
   , allPairs, seqPairs
   , countRepeats
+  , cdiv
   ) where
 
 import Data.List ( tails )
@@ -69,4 +70,17 @@ countRepeats xs = go xs []
   go (y:ys) xs
     | y `elem` xs = 1 + go ys xs
     | otherwise   = go ys (y:xs)
+```
+
+## Mathematical functions
+
+`cdiv` returns the *ceiling* of the quotient of two Integrals.
+This is extremely useful; it gives us (for example) the number of
+full or partial blocks needed to hold a given message.
+
+```haskell
+cdiv :: Integral a => a -> a -> a
+n `cdiv` d =
+  let (q,r) = n `quotRem` d
+  in  q + signum r
 ```

@@ -34,6 +34,7 @@ library
                       , Bytes
                       , Bytes.Hex
                       , Bytes.Base64
+                      , Bytes.Integral
                       , Distribution
                       , Distribution.English
                       , Padding.PKCS7
@@ -64,4 +65,4 @@ test-suite FastTests
                       , Test9, Test10, Test11, Test12
                       , Test13, Test14, Test15, Test16
 
-                      , Test17
+                      , Test17, Test18
